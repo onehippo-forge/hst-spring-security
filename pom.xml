@@ -29,6 +29,7 @@
     <jcr.version>2.0</jcr.version>
     <hippo.hst.version>2.22.00</hippo.hst.version>
     <servlet-api.version>2.4</servlet-api.version>
+    <spring-security.version>3.0.5.RELEASE</spring-security.version>
 
     <commons.lang.version>2.5</commons.lang.version>
     <commons-beanutils.version>1.8.0</commons-beanutils.version>
@@ -149,6 +150,48 @@
       <version>${hippo.hst.version}</version>
       <type>pom</type>
       <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.onehippo.cms7.hst.dependencies</groupId>
+      <artifactId>hst-spring-dependencies</artifactId>
+      <version>${hippo.hst.version}</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>${spring-security.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring-security.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring-security.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring-security.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     
     <dependency>
