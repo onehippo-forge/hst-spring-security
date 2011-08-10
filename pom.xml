@@ -16,7 +16,7 @@
   
   <name>HST Spring Security Support</name>
   <description>HST Spring Security Support Components</description>
-  <groupId>org.onehippo.forge</groupId>
+  <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
   <version>0.01.00-SNAPSHOT</version>
   <url>http://hst-springsec.forge.onehippo.org/</url>
