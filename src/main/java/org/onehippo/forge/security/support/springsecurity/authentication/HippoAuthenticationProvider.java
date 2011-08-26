@@ -39,7 +39,7 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
 
     private Credentials systemCreds;
 
-    private HippoUserDetailsService hippoUserDetailsService;
+    private HippoUserDetailsService hippoUserDetailsService = new HippoUserDetailsService();
 
     public void setSystemRepository(Repository systemRepository) {
         this.systemRepository = systemRepository;
