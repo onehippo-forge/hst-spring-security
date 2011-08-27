@@ -30,7 +30,6 @@ import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
@@ -39,7 +38,7 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
 
     private Credentials systemCreds;
 
-    private HippoUserDetailsService hippoUserDetailsService = new HippoUserDetailsService();
+    private HippoUserDetailsService hippoUserDetailsService = new HippoUserDetailsServiceImpl();
 
     public void setSystemRepository(Repository systemRepository) {
         this.systemRepository = systemRepository;
@@ -112,10 +111,10 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
             }
         }
         
-        User loadedUser = null;
+        UserDetails loadedUser = null;
 
         try {
-            loadedUser = this.getHippoUserDetailsService().loadUserByUsernameAsUserAndPassword(username, password);
+            loadedUser = this.getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
         } catch (DataAccessException repositoryProblem) {
             throw new AuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
         }

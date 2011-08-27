@@ -2,3 +2,4 @@
 /pom.xml -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.java -text svneol=unset#text/plain
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsService.java -text svneol=unset#text/plain
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsServiceImpl.java -text svneol=unset#text/plain
