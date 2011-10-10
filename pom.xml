@@ -27,7 +27,7 @@
     <project.build.javaVersion>1.5</project.build.javaVersion>
 
     <jcr.version>2.0</jcr.version>
-    <hippo.hst.version>2.22.00</hippo.hst.version>
+    <hippo.hst.version>2.23.03-alpha</hippo.hst.version>
     <servlet-api.version>2.4</servlet-api.version>
     <spring-security.version>3.0.5.RELEASE</spring-security.version>
 

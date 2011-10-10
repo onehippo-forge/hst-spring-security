@@ -37,9 +37,14 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
     private Repository systemRepository;
 
     private Credentials systemCreds;
-
-    private HippoUserDetailsService hippoUserDetailsService = new HippoUserDetailsServiceImpl();
-
+    
+    private HippoUserDetailsService hippoUserDetailsService;
+    
+    public HippoAuthenticationProvider() {
+        hippoUserDetailsService = new HippoUserDetailsServiceImpl();
+        ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
+    }
+    
     public void setSystemRepository(Repository systemRepository) {
         this.systemRepository = systemRepository;
     }
@@ -114,7 +119,7 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
         UserDetails loadedUser = null;
 
         try {
-            loadedUser = this.getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
+            loadedUser = getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
         } catch (DataAccessException repositoryProblem) {
             throw new AuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
         }

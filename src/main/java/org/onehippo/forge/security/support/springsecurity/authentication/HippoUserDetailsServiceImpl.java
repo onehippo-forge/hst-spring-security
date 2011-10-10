@@ -70,6 +70,10 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
     
     private String rolesOfUserAndGroupQuery = DEFAULT_ROLES_OF_USER_AND_GROUP_QUERY;
     
+    private String defaultRoleName;
+    
+    private String rolePrefix = "ROLE_";
+    
     public HippoUserDetailsServiceImpl() {
     }
     
@@ -135,6 +139,22 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
     
     public String getRolesOfUserAndGroupQuery() {
         return rolesOfUserAndGroupQuery;
+    }
+
+    public void setDefaultRoleName(String defaultRoleName) {
+        this.defaultRoleName = defaultRoleName;
+    }
+    
+    public String getDefaultRoleName() {
+        return defaultRoleName;
+    }
+    
+    public String getRolePrefix() {
+        return rolePrefix;
+    }
+
+    public void setRolePrefix(String rolePrefix) {
+        this.rolePrefix = rolePrefix;
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
@@ -219,9 +239,21 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
             result = q.execute();
             nodeIt = result.getNodes();
             
+            boolean defaultRoleAdded = false;
+            
             while (nodeIt.hasNext()) {
                 String roleName = nodeIt.nextNode().getProperty("hipposys:role").getString();
-                authorities.add(new GrantedAuthorityImpl(roleName));
+                String prefixedRoleName = (rolePrefix != null ? rolePrefix + roleName : roleName);
+                authorities.add(new GrantedAuthorityImpl(prefixedRoleName));
+                
+                if (defaultRoleName != null && !defaultRoleAdded && roleName.equals(defaultRoleName)) {
+                    defaultRoleAdded = true;
+                }
+            }
+            
+            if (defaultRoleName != null && !defaultRoleAdded) {
+                String prefixedRoleName = (rolePrefix != null ? rolePrefix + defaultRoleName : defaultRoleName);
+                authorities.add(new GrantedAuthorityImpl(prefixedRoleName));
             }
         } finally {
             if (session != null) {
