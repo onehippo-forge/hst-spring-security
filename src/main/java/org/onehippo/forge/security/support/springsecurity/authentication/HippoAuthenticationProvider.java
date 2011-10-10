@@ -15,7 +15,6 @@
  */
 package org.onehippo.forge.security.support.springsecurity.authentication;
 
-import javax.jcr.Credentials;
 import javax.jcr.LoginException;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
@@ -36,13 +35,9 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
 
     private Repository systemRepository;
 
-    private Credentials systemCreds;
-    
     private HippoUserDetailsService hippoUserDetailsService;
     
     public HippoAuthenticationProvider() {
-        hippoUserDetailsService = new HippoUserDetailsServiceImpl();
-        ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
     }
     
     public void setSystemRepository(Repository systemRepository) {
@@ -57,24 +52,16 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
         return systemRepository;
     }
 
-    public void setSystemCredentials(Credentials systemCreds) {
-        this.systemCreds = systemCreds;
-    }
-
-    public Credentials getSystemCredentials() {
-        if (systemCreds == null) {
-            systemCreds = HstServices.getComponentManager().getComponent(
-                    Credentials.class.getName() + ".hstconfigreader");
-        }
-
-        return systemCreds;
-    }
-
     public void setHippoUserDetailsService(HippoUserDetailsService hippoUserDetailsService) {
         this.hippoUserDetailsService = hippoUserDetailsService;
     }
 
     protected HippoUserDetailsService getHippoUserDetailsService() {
+        if (hippoUserDetailsService == null) {
+            hippoUserDetailsService = new HippoUserDetailsServiceImpl();
+            ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
+        }
+        
         return hippoUserDetailsService;
     }
 
