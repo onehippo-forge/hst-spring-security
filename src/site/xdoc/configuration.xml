@@ -227,9 +227,13 @@
           Now, you can secure your web site by setting 'hst:authenticated', 'hst:roles' or 'hst:users' either 'hst:sitemapitem' node or 'hst:mount' node.
         </p>
         <p>
-          For example, if you have 'securedresource' sitemap item, and it has 'hst:authenticated=true' and 'hst:roles=admin,everybody', then
+          For example, if you have 'securedresource' sitemap item, and it has 'hst:authenticated=true' and 'hst:roles=ROLE_admin,ROLE_everybody', then
           any requests to the sitemap item will be allowed only authenticated users.
         </p>
+        <em>
+          Note: Because the role name with Spring Security should be prefixed by 'ROLE_' by default, you will need to prefix the role name by the prefix
+                when configuring the hst:roles property.
+        </em>
         <p>
           HST Spring Security Support supports the same feature for authorization as the default HST-2 Security module provides.
           So, please refer to the following link in order to learn how to set authorization.
