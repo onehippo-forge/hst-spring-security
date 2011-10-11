@@ -1,0 +1,87 @@
+<?xml version="1.0"?><!--
+    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+    applicable law or agreed to in writing, software distributed under
+    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+    OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and
+    limitations under the License.
+  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+<document>
+  <properties>
+    <title>How to use HST Spring Security Support</title>
+  </properties>
+  <body>
+    <section name="How to use HST Spring Security Support">
+      <subsection name="Prerequisites">
+        <p>
+          These instruction assumes that you have maven 2 or 3 based build for your site.
+        </p>
+      </subsection>
+      <subsection name="Maven 2 repository">
+        <p>Add this repository to your root pom.xml:</p>
+        <source><![CDATA[
+    <repository>
+      <id>hippo-maven2-forge</id>
+      <name>Hippo Maven 2 Forge</name>
+      <url>http://maven.onehippo.com/maven2-forge</url>
+    </repository>]]></source>
+      </subsection>
+      <subsection name="Adding Spring Framework Dependencies to your project">
+        <source><![CDATA[
+    <!-- 
+      The HST Spring Security Support requires Spring Framework Libraries.
+      You can declare the Spring Framework dependencies by yourself.
+      One of the simplest way is to use hst-spring-dependencies pom dependency for convenience.
+    -->
+    <dependency>
+      <groupId>org.onehippo.cms7.hst.dependencies</groupId>
+      <artifactId>hst-spring-dependencies</artifactId>
+      <type>pom</type>
+      <version>${hippo.hst.version}</version>
+    </dependency>
+        ]]></source>
+      </subsection>
+      <subsection name="Adding Spring Security Dependencies to your project">
+        <source><![CDATA[
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+        ]]></source>
+      </subsection>
+      <subsection name="Adding HST Spring Security Support Dependencies to your project">
+        <source><![CDATA[
+    <dependency>
+      <groupId>org.onehippo.forge.hst-springsec</groupId>
+      <artifactId>hst-springsec</artifactId>
+      <version>${hst-springsec.version}</version>
+    </dependency>
+        ]]></source>
+      </subsection>
+    </section>
+  </body>
+</document>

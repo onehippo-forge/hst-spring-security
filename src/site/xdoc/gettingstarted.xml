@@ -1,0 +1,172 @@
+<?xml version="1.0"?><!--
+    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+    applicable law or agreed to in writing, software distributed under
+    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+    OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and
+    limitations under the License.
+  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+<document>
+  <properties>
+    <title>Getting Started</title>
+  </properties>
+  <body>
+    <section name="Getting Started">
+      <subsection name="Configure Spring Web Application Context with Spring Security Configuration">
+        <p>
+          First you need to configure Spring Web Application Context in your web.xml.
+        </p>
+        <source><![CDATA[
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <display-name>Example HST SITE Web Application</display-name>
+
+  <!-- ... -->
+  
+  <!-- 
+    Configure Spring Web Application Context configuration files.
+    You should include your spring security configuration in any file(s) in the following. 
+  -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/applicationContext.xml
+      /WEB-INF/applicationContext-security.xml      
+    </param-value>
+  </context-param>
+
+  <!-- ... -->
+  
+  <!-- 
+    Configure Spring Security Filter.
+    Usually you may just copy and paste the following into your web application descriptor.
+  -->
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <!-- ... -->
+  
+  <!-- 
+    Configure Spring Security Filter Mapping.
+    Usually you may just copy and paste the following into your web application descriptor.
+  -->
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <!-- ... -->
+  
+  <!--
+    Configure Spring Web Application Context Loader Listener.
+  -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- ... -->
+
+</web-app>
+        ]]></source>
+      </subsection>
+      <subsection name="Configuring Spring Web Application Context">
+        <p>
+          You may put any beans in your Spring Web Application Context configuration.
+          In this example, we assume you will add your custom beans in /WEB-INF/applicationContext.xml.
+        </p>
+        <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:lang="http://www.springframework.org/schema/lang" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+  <!-- You may add any beans here. -->  
+
+</beans>
+        ]]></source>
+      </subsection>
+      <subsection name="Configuring Spring Security">
+        <p>
+          Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
+        </p>
+        <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans" 
+       xmlns:lang="http://www.springframework.org/schema/lang" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+  <!-- HTTP Security Configuration -->
+  <http auto-config="true">
+    <intercept-url pattern="/css/**" filters="none"/>
+    <intercept-url pattern="/images/**" filters="none"/>
+    <intercept-url pattern="/binaries/**" filters="none"/>
+    <intercept-url pattern="/login.jsp*" filters="none"/>
+    <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY, ROLE_everybody" />
+    <form-login login-page="/login.jsp"
+                default-target-url="/home"
+                always-use-default-target="true" />
+    <logout logout-url="/logout.jsp" />
+  </http>
+
+  <!-- Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider'). -->
+  <authentication-manager>
+    <authentication-provider ref="hippoAuthenticationProvider" />
+  </authentication-manager>
+  
+  <!-- Hippo Repository based Authentication Provider. This Authentication Provider provide authentication against Hippo Repository Security Store. -->
+  <beans:bean id="hippoAuthenticationProvider" 
+              class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
+  </beans:bean>
+
+</beans:beans>
+        ]]></source>
+        <p>
+          In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into the authentication-manager in order to
+          use Hippo Repository based authentication.
+        </p>
+        <p>
+          Please refer to Spring Security Documentation for detailed guidelines on Spring Security configurations.
+        </p>
+      </subsection>
+      <subsection name="Securing Your Site">
+        <p>
+          Now, you can secure your web site by setting 'hst:authenticated', 'hst:roles' or 'hst:users' either 'hst:sitemapitem' node or 'hst:mount' node.
+        </p>
+        <p>
+          For example, if you have 'securedresource' sitemap item, and it has 'hst:authenticated=true' and 'hst:roles=admin,everybody', then
+          any requests to the sitemap item will be allowed only authenticated users.
+        </p>
+        <p>
+          HST Spring Security Support supports the same feature for authorization as the default HST-2 Security module provides.
+          So, please refer to the following link in order to learn how to set authorization.
+          <ul>
+            <li><a href="https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration">https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration</a></li>
+          </ul>
+        </p>
+      </subsection>
+    </section>
+  </body>
+</document>
