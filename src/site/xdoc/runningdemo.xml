@@ -1,0 +1,55 @@
+<?xml version="1.0"?><!--
+    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+    applicable law or agreed to in writing, software distributed under
+    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+    OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and
+    limitations under the License.
+  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+<document>
+  <properties>
+    <title>Running Demo Application</title>
+  </properties>
+  <body>
+    <section name="Running Demo Application">
+      <subsection name="Check out demo application">
+        <p>
+          You can check out, build and run the demo application like the following:
+        </p>
+        <source><![CDATA[
+$ svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec-demo/trunk hst-springsec-demo
+$ cd hst-springsec-demo
+$ mvn install
+$ mvn -P cargo.run
+        ]]></source>
+      </subsection>
+      <subsection name="Testing the Demo Application">
+        <ul>
+          <li>
+            You may navigate to 'home', 'about' and 'news' pages without authentication.
+            Please refer to the configuration in /WEB-INF/applicationContext.xml for the access configuration.
+          </li>
+          <li>
+            You will meet 'HTTP 401 Not Authenticated' error if you visit 'Secured Resource' page without logging in.
+            <br/>
+            For your information, if you set different roles for the sitemap item, then you may meet 'HTTP 403 Forbidden' error
+            for the restriced sitemap item even though you're authenticated. 
+          </li>
+          <li>
+            When you click 'Log In' link, you will get to the login page which is configured in /WEB-INF/applicationContext-security.xml.
+          </li>
+          <li>
+            Even though there's no physical page mapped 'logout.jsp', if you click 'Log Out' link with the page link,
+            Spring Security will invalidate your current authentication because the logout url is configured in
+            /WEB-INF/applicationContext-security.xml as well.
+          </li>
+        </ul>
+      </subsection>
+    </section>
+  </body>
+</document>

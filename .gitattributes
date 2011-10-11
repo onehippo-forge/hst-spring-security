@@ -6,7 +6,8 @@ src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/
 src/main/java/org/onehippo/forge/security/support/springsecurity/container/SpringSecurityValve.java -text svneol=unset#text/plain
 src/site/site.xml -text svneol=unset#text/plain
 src/site/xdoc/build-from-source.xml -text svneol=unset#text/plain
-src/site/xdoc/gettingstarted.xml -text svneol=unset#text/plain
+src/site/xdoc/configuration.xml -text svneol=unset#text/plain
 src/site/xdoc/index.xml -text svneol=unset#text/plain
 src/site/xdoc/install.xml -text svneol=unset#text/plain
 src/site/xdoc/release-notes.xml -text svneol=unset#text/plain
+src/site/xdoc/runningdemo.xml -text svneol=unset#text/plain

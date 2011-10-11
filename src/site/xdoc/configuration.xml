@@ -13,10 +13,10 @@
   "http://maven.apache.org/dtd/xdoc_1_0.dtd">
 <document>
   <properties>
-    <title>Getting Started</title>
+    <title>Configuration</title>
   </properties>
   <body>
-    <section name="Getting Started">
+    <section name="Configuration">
       <subsection name="Configure Spring Web Application Context with Spring Security Configuration">
         <p>
           First you need to configure Spring Web Application Context in your web.xml.
@@ -151,6 +151,70 @@
           Please refer to Spring Security Documentation for detailed guidelines on Spring Security configurations.
         </p>
       </subsection>
+      <subsection name="Adding SpringSecurityValve into the Existing Pipeline(s)">
+        <p>
+          In order to enable Spring Security Integration in your SITE application, you should insert 'SpringSecurityValve' into your existing pipelines.
+        </p>
+        <p>
+          There might be three different pipelines:
+        </p>
+        <ul>
+          <li>DefaultSitePipeline: The default website pipeline</li>
+          <li>JaxrsRestContentPipeline: The Content/Context Aware JAX-RS Service pipeline</li>
+          <li>JaxrsRestPlainPipeline: The Plain JAX-RS Service pipeline</li>
+        </ul>
+        <p>
+          In the example below, we just inserted SpringSecurityValve into the default pipeline only.
+          If you want to enable Spring Security Integration in either of JAX-RS pipelines, you will
+          need to copy and paste the second bean definition block with changing the pipeline name argument.
+        </p>
+        <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:lang="http://www.springframework.org/schema/lang" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+  
+  <!-- Defininig SpringSecurityValve -->
+  <bean id="springSecurityValve" class="org.onehippo.forge.security.support.springsecurity.container.SpringSecurityValve"> 
+  </bean>
+  
+  <!-- 
+    Inserting SpringSecurityValve into the default pipeline.
+    You may copy and paste the following block to insert the SpringSecurityValve for more pipelines.
+    'DefaultSitePipeline' is for the default website pipeline.
+    'JaxrsRestContentPipeline' is for the Content/Context Aware JAX-RS Service pipeline.
+    'JaxrsRestPlainPipeline' is for the Plain JAX-RS Service pipeline.
+  --> 
+  <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject">
+      <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="org.hippoecm.hst.core.container.Pipelines" />
+        <property name="targetMethod" value="getPipeline" />
+        <property name="arguments">
+          <list>
+            <!-- 
+              You may use one of the following: 'DefaultSitePipeline', 'JaxrsRestContentPipeline' and 'JaxrsRestPlainPipeline'.
+            -->
+            <value>DefaultSitePipeline</value>
+          </list>
+        </property>
+      </bean>
+    </property>
+    <property name="targetMethod" value="addInitializationValve" />
+    <property name="arguments">
+      <ref bean="springSecurityValve" />
+    </property>
+  </bean>
+  
+</beans>
+        ]]></source>
+      </subsection>
       <subsection name="Securing Your Site">
         <p>
           Now, you can secure your web site by setting 'hst:authenticated', 'hst:roles' or 'hst:users' either 'hst:sitemapitem' node or 'hst:mount' node.
@@ -164,6 +228,15 @@
           So, please refer to the following link in order to learn how to set authorization.
           <ul>
             <li><a href="https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration">https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration</a></li>
+          </ul>
+        </p>
+      </subsection>
+      <subsection name="Using Standard Security APIs">
+        <p>
+          Also, you can use JavaEE standard Security APIs now in your components or servlet/filter for programmatic security checks such as:
+          <ul>
+            <li>javax.servlet.http.HttpServletRequest#getUserPrincipal()</li>
+            <li>javax.servlet.http.HttpServletRequest#isUserInRole(java.lang.String role)</li>
           </ul>
         </p>
       </subsection>
