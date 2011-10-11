@@ -131,12 +131,18 @@
     <logout logout-url="/logout.jsp" />
   </http>
 
-  <!-- Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider'). -->
+  <!-- 
+    Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider').
+    However, you can use any other authentication provider(s) if you don't need to authenticate users against Hippo Repository.
+  -->
   <authentication-manager>
     <authentication-provider ref="hippoAuthenticationProvider" />
   </authentication-manager>
   
-  <!-- Hippo Repository based Authentication Provider. This Authentication Provider provide authentication against Hippo Repository Security Store. -->
+  <!-- 
+    Hippo Repository based Authentication Provider. This Authentication Provider provide authentication against Hippo Repository Security Store.
+    If you don't need to authenticate users against Hippo Repository, you don't have to include the following bean. 
+  -->
   <beans:bean id="hippoAuthenticationProvider" 
               class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
   </beans:bean>
@@ -146,6 +152,7 @@
         <p>
           In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into the authentication-manager in order to
           use Hippo Repository based authentication.
+          If you want to use other authentication provider(s), you don't have to include the hippoAuthenticationProvider.
         </p>
         <p>
           Please refer to Spring Security Documentation for detailed guidelines on Spring Security configurations.
