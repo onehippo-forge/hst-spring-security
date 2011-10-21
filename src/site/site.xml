@@ -33,6 +33,8 @@
       <item name="Build from source" href="build-from-source.html" />
     </menu>
 
+    <menu ref="reports" />
+    
   </body>
 
 </project>
