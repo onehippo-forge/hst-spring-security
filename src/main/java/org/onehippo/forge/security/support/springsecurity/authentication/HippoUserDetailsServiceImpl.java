@@ -49,7 +49,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
     static final Logger log = LoggerFactory.getLogger(HippoUserDetailsServiceImpl.class);
     
     private static final String DEFAULT_USER_QUERY = "//hippo:configuration/hippo:users/{0}";
-    
+
     private static final String DEFAULT_GROUPS_OF_USER_QUERY = 
         "//element(*, hipposys:group)[(@hipposys:members = ''{0}'' or @hipposys:members = ''*'') and @hipposys:securityprovider = ''internal'']";
     
@@ -70,10 +70,10 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
     
     private String rolesOfUserAndGroupQuery = DEFAULT_ROLES_OF_USER_AND_GROUP_QUERY;
     
-    private String defaultRoleName;
+    private String defaultRoleName = "everybody";
     
     private String rolePrefix = "ROLE_";
-    
+
     public HippoUserDetailsServiceImpl() {
     }
     

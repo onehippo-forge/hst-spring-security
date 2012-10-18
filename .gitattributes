@@ -1,9 +1,19 @@
 * text=auto !eol
 /pom.xml -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.java -text svneol=unset#text/plain
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoEmailUserDetailsServiceImpl.java -text svneol=unset#text/plain
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsService.java -text svneol=unset#text/plain
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsServiceImpl.java -text svneol=unset#text/plain
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUsernamePasswordAuthenticationFilter.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/login/HippoLoginUrlAuthenticationEntryPoint.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/login/HippoSimpleUrlAuthenticationSuccessHandler.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/logout/HippoLogoutFilter.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/logout/HippoLogoutSuccessHandler.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/logout/HippoSecurityContextLogoutHandler.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/rememberme/HippoAuthenticationRememberMeProvider.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/rememberme/HippoTokenBasedRememberMeServices.java -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/container/SpringSecurityValve.java -text svneol=unset#text/plain
+src/main/java/org/onehippo/forge/security/support/springsecurity/utils/SpringSecurityUtils.java -text
 src/site/checkstyle.xml -text svneol=unset#text/plain
 src/site/site.xml -text svneol=unset#text/plain
 src/site/xdoc/build-from-source.xml -text svneol=unset#text/plain

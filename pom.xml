@@ -18,16 +18,16 @@
   <description>HST Spring Security Support Components</description>
   <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
-  <version>0.01.01-SNAPSHOT</version>
+  <version>0.02.00-SNAPSHOT</version>
   <url>http://hst-springsec.forge.onehippo.org/</url>
 
   <properties>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.javaVersion>1.5</project.build.javaVersion>
+    <project.build.javaVersion>1.6</project.build.javaVersion>
 
     <jcr.version>2.0</jcr.version>
-    <hippo.hst.version>2.23.03-alpha</hippo.hst.version>
+    <hippo.hst.version>2.24.07</hippo.hst.version>
     <servlet-api.version>2.4</servlet-api.version>
     <spring-security.version>3.0.5.RELEASE</spring-security.version>
 
