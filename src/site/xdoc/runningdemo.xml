@@ -32,21 +32,19 @@ $ mvn -P cargo.run
         <ul>
           <li>
             You may navigate to 'home', 'about' and 'news' pages without authentication.
-            Please refer to the configuration in /WEB-INF/applicationContext.xml for the access configuration.
+            Please refer to the configuration in /WEB-INF/applicationContext-security.xml for the access configuration.
           </li>
-          <li>
-            You will meet 'HTTP 401 Not Authenticated' error if you visit 'Secured Resource' page without logging in.
-            <br/>
-            For your information, if you set different roles for the sitemap item, then you may meet 'HTTP 403 Forbidden' error
-            for the restriced sitemap item even though you're authenticated. 
-          </li>
-          <li>
+            <li>
+                You will be redirected to the 'Log In' page if you visit 'Secured Resource' page without logging in.
+                <br/>
+                For your information, if you set different roles for the sitemap item, then you may meet 'HTTP 403 Forbidden' error
+                for the restriced sitemap item even though you're authenticated.
+            </li>
+            <li>
             When you click 'Log In' link, you will get to the login page which is configured in /WEB-INF/applicationContext-security.xml.
           </li>
           <li>
-            Even though there's no physical page mapped 'logout.jsp', if you click 'Log Out' link with the page link,
-            Spring Security will invalidate your current authentication because the logout url is configured in
-            /WEB-INF/applicationContext-security.xml as well.
+
           </li>
         </ul>
       </subsection>
