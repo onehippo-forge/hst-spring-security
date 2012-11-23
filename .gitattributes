@@ -6,6 +6,7 @@ src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsServiceImpl.java -text svneol=unset#text/plain
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/HippoUsernamePasswordAuthenticationFilter.java -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/login/HippoLoginUrlAuthenticationEntryPoint.java -text
+src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/login/HippoSimpleUrlAuthenticationFailureHandler.java -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/login/HippoSimpleUrlAuthenticationSuccessHandler.java -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/logout/HippoLogoutFilter.java -text
 src/main/java/org/onehippo/forge/security/support/springsecurity/authentication/logout/HippoLogoutSuccessHandler.java -text

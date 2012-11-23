@@ -47,6 +47,12 @@ public class HippoLogoutSuccessHandler extends AbstractAuthenticationTargetUrlRe
         }
 
         SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+
+        // Don't put a slash at the end of _cmsinternal.
+        if (springSecurityUtils.requestComesFromCms(request) && StringUtils.equals(targetUrl, "/")) {
+            targetUrl = "";
+        }
+
         response.sendRedirect(springSecurityUtils.buildRedirectUrl(targetUrl, request));
     }
 }

@@ -15,6 +15,7 @@
  */
 package org.onehippo.forge.security.support.springsecurity.authentication.logout;
 
+import org.apache.commons.lang.StringUtils;
 import org.onehippo.forge.security.support.springsecurity.utils.SpringSecurityUtils;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -63,11 +64,15 @@ public class HippoLogoutFilter extends LogoutFilter {
         }
 
         SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-        String requestPath = request.getContextPath() + getFilterProcessesUrl();
+        String requestPath = request.getServletPath();
+
+        if (!StringUtils.contains(requestPath, getFilterProcessesUrl())) {
+            return false;
+        }
+
 
         if (springSecurityUtils.requestComesFromCms(request)) {
-            requestPath= request.getContextPath() + "/" + springSecurityUtils.getCmsPreviewPrefix() +
-                    getFilterProcessesUrl();
+            requestPath= request.getServletPath() + "/" + springSecurityUtils.getCmsPreviewPrefix();
         }
 
         return uri.endsWith(requestPath);

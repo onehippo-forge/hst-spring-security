@@ -26,7 +26,7 @@ import java.io.IOException;
 
 /**
  * Hippo Repository based SimpleUrlAuthenticationSuccessHandler extension.
- * @see org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler
+ * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
  *
  */
 public class HippoSimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

@@ -151,8 +151,8 @@
    </beans:bean>
 
    <beans:bean id="failureHandler"
-            class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-      <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
+                class="com.alogient.seroyal.security.springsecurity.HippoSimpleUrlAuthenticationFailureHandler">
+     <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
    </beans:bean>
 
 
@@ -298,8 +298,8 @@
    </beans:bean>
 
    <beans:bean id="failureHandler"
-            class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-      <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
+                class="com.alogient.seroyal.security.springsecurity.HippoSimpleUrlAuthenticationFailureHandler">
+     <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
    </beans:bean>
 
 
