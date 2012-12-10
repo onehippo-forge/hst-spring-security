@@ -151,7 +151,7 @@
    </beans:bean>
 
    <beans:bean id="failureHandler"
-                class="com.alogient.seroyal.security.springsecurity.HippoSimpleUrlAuthenticationFailureHandler">
+                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
      <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
    </beans:bean>
 
@@ -298,7 +298,7 @@
    </beans:bean>
 
    <beans:bean id="failureHandler"
-                class="com.alogient.seroyal.security.springsecurity.HippoSimpleUrlAuthenticationFailureHandler">
+                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
      <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
    </beans:bean>
 
