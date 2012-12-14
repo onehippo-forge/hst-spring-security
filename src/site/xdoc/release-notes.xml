@@ -17,7 +17,7 @@
   </properties>
   <body>
     <section name="Release Notes">
-      <subsection name="0.02.00">
+      <subsection name="0.02.01">
         <ul>
             <li>Better support of Spring Security within the Channel Manager</li>
             <li>Add the support of Remember Me</li>
