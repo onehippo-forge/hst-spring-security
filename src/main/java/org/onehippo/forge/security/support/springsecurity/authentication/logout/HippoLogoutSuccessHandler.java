@@ -30,29 +30,30 @@ import java.io.IOException;
 
 /**
  * Hippo Repository based LogoutSuccessHandler implementation.
+ *
  * @see org.springframework.security.web.authentication.logout.LogoutSuccessHandler
  */
 public class HippoLogoutSuccessHandler extends AbstractAuthenticationTargetUrlRequestHandler implements LogoutSuccessHandler {
 
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+  protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String targetUrl = determineTargetUrl(request, response);
+  @Override
+  public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    String targetUrl = determineTargetUrl(request, response);
 
-        if (response.isCommitted()) {
-            logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
-            return;
-        }
-
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-
-        // Don't put a slash at the end of _cmsinternal.
-        if (springSecurityUtils.requestComesFromCms(request) && StringUtils.equals(targetUrl, "/")) {
-            targetUrl = "";
-        }
-
-        response.sendRedirect(springSecurityUtils.buildRedirectUrl(targetUrl, request));
+    if (response.isCommitted()) {
+      logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
+      return;
     }
+
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+
+    // Don't put a slash at the end of _cmsinternal.
+    if (springSecurityUtils.requestComesFromCms(request) && StringUtils.equals(targetUrl, "/")) {
+      targetUrl = "";
+    }
+
+    response.sendRedirect(springSecurityUtils.buildRedirectUrl(targetUrl, request));
+  }
 }

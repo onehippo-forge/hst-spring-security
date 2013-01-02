@@ -13,39 +13,70 @@ import java.io.IOException;
 
 /**
  * Hippo Repository based SimpleUrlAuthenticationFailureHandler extension.
+ *
  * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
  *
  */
 public class HippoSimpleUrlAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    private Logger logger = LoggerFactory.getLogger(HippoSimpleUrlAuthenticationFailureHandler.class);
+  private Logger logger = LoggerFactory.getLogger(HippoSimpleUrlAuthenticationFailureHandler.class);
 
-    private String defaultFailureUrl;
+  private String defaultFailureUrl;
+  private boolean useReferer = false;
+  private String indicatingFailedLogin;
 
-    @Override
-    public void setDefaultFailureUrl(String defaultFailureUrl) {
-        this.defaultFailureUrl = defaultFailureUrl;
+
+
+  @Override
+  public void setDefaultFailureUrl(String defaultFailureUrl) {
+    this.defaultFailureUrl = defaultFailureUrl;
+  }
+
+  /**
+   * If set to <tt>true</tt> the <tt>Referer</tt> header will be used (if available). Defaults to <tt>false</tt>.
+   */
+  public void setUseReferer(boolean useReferer) {
+    this.useReferer = useReferer;
+  }
+
+
+  /**
+   * @param indicatingFailedLogin the indication to set
+   */
+  public void setIndicatingFailedLogin(String indicatingFailedLogin) {
+    this.indicatingFailedLogin = indicatingFailedLogin;
+  }
+
+  @Override
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+
+    if (defaultFailureUrl == null) {
+      logger.debug("No failure URL set, sending 401 Unauthorized error");
+
+      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + exception.getMessage());
+    } else {
+      saveException(request, exception);
+
+      SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+
+      if (useReferer) {
+        defaultFailureUrl = addParameterIndicatingFailedLogin(request.getHeader("Referer"));
+        logger.info("Using Referer header: " + defaultFailureUrl);
+      }
+
+
+      // Use the DefaultSavedRequest URL
+      String redirectUrl = springSecurityUtils.buildRedirectUrl(defaultFailureUrl, request);
+
+      if (logger.isInfoEnabled()) {
+        logger.info("Redirecting to the Url: " + redirectUrl);
+      }
+
+      getRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
+  }
 
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-
-        if (defaultFailureUrl == null) {
-            logger.debug("No failure URL set, sending 401 Unauthorized error");
-
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + exception.getMessage());
-        } else {
-            saveException(request, exception);
-
-            // Use the DefaultSavedRequest URL
-            SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-            String redirectUrl = springSecurityUtils.buildRedirectUrl(defaultFailureUrl, request);
-
-            if (logger.isInfoEnabled()) {
-                logger.info("Redirecting to defaultFailure Url: " + redirectUrl);
-            }
-
-            getRedirectStrategy().sendRedirect(request, response, redirectUrl);
-        }
-    }
+  private String addParameterIndicatingFailedLogin(String referer) {
+    return referer + indicatingFailedLogin;
+  }
 }

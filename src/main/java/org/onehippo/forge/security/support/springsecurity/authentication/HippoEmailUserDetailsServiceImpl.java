@@ -18,18 +18,18 @@ package org.onehippo.forge.security.support.springsecurity.authentication;
 
 /**
  * Hippo Repository based UserDetailsService implementation.
+ *
  * @see org.springframework.security.core.userdetails.UserDetailsService
- *
- * This implementation allows to use an email as username.
- *
+ *      <p/>
+ *      This implementation allows to use an email as username.
  */
 public class HippoEmailUserDetailsServiceImpl extends HippoUserDetailsServiceImpl {
 
-    private static final String QUERY_USER_EXISTS = "//hippo:configuration/hippo:users/*[ @hipposys:email = ''{0}'']";
+  private static final String QUERY_USER_EXISTS = "//hippo:configuration/hippo:users/*[ @hipposys:email = ''{0}'']";
 
 
-    @Override
-    public String getUserQuery() {
-        return QUERY_USER_EXISTS;
-    }
+  @Override
+  public String getUserQuery() {
+    return QUERY_USER_EXISTS;
+  }
 }

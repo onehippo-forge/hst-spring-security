@@ -24,33 +24,34 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Hippo Repository based UsernamePasswordAuthenticationFilter implementation.
+ *
  * @see org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
  */
 public class HippoUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    @Override
-    protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
+  @Override
+  protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
 
-        String uri = request.getRequestURI();
-        int pathParamIndex = uri.indexOf(';');
+    String uri = request.getRequestURI();
+    int pathParamIndex = uri.indexOf(';');
 
-        if (pathParamIndex > 0) {
-            // strip everything after the first semi-colon
-            uri = uri.substring(0, pathParamIndex);
-        }
-
-        if ("".equals(request.getContextPath())) {
-            return uri.endsWith(getFilterProcessesUrl());
-        }
-
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-        String requestPath = request.getContextPath() + getFilterProcessesUrl();
-
-        if (springSecurityUtils.requestComesFromCms(request)) {
-            requestPath= request.getContextPath() + "/" + springSecurityUtils.getCmsPreviewPrefix() +
-                    getFilterProcessesUrl();
-        }
-
-        return uri.endsWith(requestPath);
+    if (pathParamIndex > 0) {
+      // strip everything after the first semi-colon
+      uri = uri.substring(0, pathParamIndex);
     }
+
+    if ("".equals(request.getContextPath())) {
+      return uri.endsWith(getFilterProcessesUrl());
+    }
+
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+    String requestPath = request.getContextPath() + getFilterProcessesUrl();
+
+    if (springSecurityUtils.requestComesFromCms(request)) {
+      requestPath = request.getContextPath() + "/" + springSecurityUtils.getCmsPreviewPrefix() +
+          getFilterProcessesUrl();
+    }
+
+    return uri.endsWith(requestPath);
+  }
 }

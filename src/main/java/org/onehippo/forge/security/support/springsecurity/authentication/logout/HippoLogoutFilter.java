@@ -26,55 +26,56 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Hippo Repository based LogoutFilter extension.
- * @see org.springframework.security.web.authentication.logout.LogoutFilter
  *
- * This class has been overrides to allow the user to logout within the Channel Manager
+ * @see org.springframework.security.web.authentication.logout.LogoutFilter
+ *      <p/>
+ *      This class has been overrides to allow the user to logout within the Channel Manager
  */
 public class HippoLogoutFilter extends LogoutFilter {
 
 
-    public HippoLogoutFilter(LogoutSuccessHandler logoutSuccessHandler, LogoutHandler... handlers) {
-        super(logoutSuccessHandler, handlers);
+  public HippoLogoutFilter(LogoutSuccessHandler logoutSuccessHandler, LogoutHandler... handlers) {
+    super(logoutSuccessHandler, handlers);
+  }
+
+  public HippoLogoutFilter(String logoutSuccessUrl, LogoutHandler... handlers) {
+    super(logoutSuccessUrl, handlers);
+  }
+
+  @Override
+  protected boolean requiresLogout(HttpServletRequest request, HttpServletResponse response) {
+
+    String uri = request.getRequestURI();
+    int pathParamIndex = uri.indexOf(';');
+
+    if (pathParamIndex > 0) {
+      // strip everything from the first semi-colon
+      uri = uri.substring(0, pathParamIndex);
     }
 
-    public HippoLogoutFilter(String logoutSuccessUrl, LogoutHandler... handlers) {
-        super(logoutSuccessUrl, handlers);
+    int queryParamIndex = uri.indexOf('?');
+
+    if (queryParamIndex > 0) {
+      // strip everything from the first question mark
+      uri = uri.substring(0, queryParamIndex);
     }
 
-    @Override
-    protected boolean requiresLogout(HttpServletRequest request, HttpServletResponse response) {
-
-        String uri = request.getRequestURI();
-        int pathParamIndex = uri.indexOf(';');
-
-        if (pathParamIndex > 0) {
-            // strip everything from the first semi-colon
-            uri = uri.substring(0, pathParamIndex);
-        }
-
-        int queryParamIndex = uri.indexOf('?');
-
-        if (queryParamIndex > 0) {
-            // strip everything from the first question mark
-            uri = uri.substring(0, queryParamIndex);
-        }
-
-        if ("".equals(request.getContextPath())) {
-            return uri.endsWith(getFilterProcessesUrl());
-        }
-
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-        String requestPath = request.getServletPath();
-
-        if (!StringUtils.contains(requestPath, getFilterProcessesUrl())) {
-            return false;
-        }
-
-
-        if (springSecurityUtils.requestComesFromCms(request)) {
-            requestPath= request.getServletPath() + "/" + springSecurityUtils.getCmsPreviewPrefix();
-        }
-
-        return uri.endsWith(requestPath);
+    if ("".equals(request.getContextPath())) {
+      return uri.endsWith(getFilterProcessesUrl());
     }
+
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+    String requestPath = request.getServletPath();
+
+    if (!StringUtils.contains(requestPath, getFilterProcessesUrl())) {
+      return false;
+    }
+
+
+    if (springSecurityUtils.requestComesFromCms(request)) {
+      requestPath = request.getServletPath() + "/" + springSecurityUtils.getCmsPreviewPrefix();
+    }
+
+    return uri.endsWith(requestPath);
+  }
 }

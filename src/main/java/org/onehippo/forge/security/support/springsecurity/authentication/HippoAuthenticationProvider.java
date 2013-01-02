@@ -33,90 +33,90 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    private Repository systemRepository;
+  private Repository systemRepository;
 
-    private HippoUserDetailsService hippoUserDetailsService;
-    
-    public HippoAuthenticationProvider() {
-    }
-    
-    public void setSystemRepository(Repository systemRepository) {
-        this.systemRepository = systemRepository;
-    }
+  private HippoUserDetailsService hippoUserDetailsService;
 
-    public Repository getSystemRepository() {
-        if (systemRepository == null) {
-            systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName());
-        }
+  public HippoAuthenticationProvider() {
+  }
 
-        return systemRepository;
+  public void setSystemRepository(Repository systemRepository) {
+    this.systemRepository = systemRepository;
+  }
+
+  public Repository getSystemRepository() {
+    if (systemRepository == null) {
+      systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName());
     }
 
-    public void setHippoUserDetailsService(HippoUserDetailsService hippoUserDetailsService) {
-        this.hippoUserDetailsService = hippoUserDetailsService;
+    return systemRepository;
+  }
+
+  public void setHippoUserDetailsService(HippoUserDetailsService hippoUserDetailsService) {
+    this.hippoUserDetailsService = hippoUserDetailsService;
+  }
+
+  protected HippoUserDetailsService getHippoUserDetailsService() {
+    if (hippoUserDetailsService == null) {
+      hippoUserDetailsService = new HippoUserDetailsServiceImpl();
+      ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
     }
 
-    protected HippoUserDetailsService getHippoUserDetailsService() {
-        if (hippoUserDetailsService == null) {
-            hippoUserDetailsService = new HippoUserDetailsServiceImpl();
-            ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
-        }
-        
-        return hippoUserDetailsService;
+    return hippoUserDetailsService;
+  }
+
+  @Override
+  protected void additionalAuthenticationChecks(UserDetails userDetails,
+                                                UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+    if (authentication.getCredentials() == null) {
+      logger.debug("Authentication failed: no credentials provided");
+
+      throw new BadCredentialsException(messages.getMessage(
+          "AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"),
+          null);
+    }
+  }
+
+  @Override
+  protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
+      throws AuthenticationException {
+
+    Repository sysRepo = getSystemRepository();
+
+    if (sysRepo == null) {
+      throw new ProviderNotFoundException("Hippo Repository is not available now.");
     }
 
-    @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails,
-            UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        if (authentication.getCredentials() == null) {
-            logger.debug("Authentication failed: no credentials provided");
+    Session session = null;
+    String password = authentication.getCredentials().toString();
 
-            throw new BadCredentialsException(messages.getMessage(
-                    "AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"),
-                    null);
-        }
+    try {
+      session = sysRepo.login(new SimpleCredentials(username, password.toCharArray()));
+    } catch (LoginException e) {
+      throw new BadCredentialsException(e.getMessage());
+    } catch (RepositoryException e) {
+      throw new ProviderNotFoundException(e.getMessage());
+    } finally {
+      try {
+        session.logout();
+      } catch (Exception ignore) {
+      }
     }
 
-    @Override
-    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
-            throws AuthenticationException {
-        
-        Repository sysRepo = getSystemRepository();
-        
-        if (sysRepo == null) {
-            throw new ProviderNotFoundException("Hippo Repository is not available now.");
-        }
-        
-        Session session = null;
-        String password = authentication.getCredentials().toString();
-        
-        try {
-            session = sysRepo.login(new SimpleCredentials(username, password.toCharArray())); 
-        } catch (LoginException e) {
-            throw new BadCredentialsException(e.getMessage());
-        } catch (RepositoryException e) {
-            throw new ProviderNotFoundException(e.getMessage());
-        } finally {
-            try {
-                session.logout();
-            } catch (Exception ignore) {
-            }
-        }
-        
-        UserDetails loadedUser = null;
+    UserDetails loadedUser = null;
 
-        try {
-            loadedUser = getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
-        } catch (DataAccessException repositoryProblem) {
-            throw new AuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
-        }
-
-        if (loadedUser == null) {
-            throw new AuthenticationServiceException(
-                    "UserDetailsService returned null, which is an interface contract violation");
-        }
-        
-        return loadedUser;
+    try {
+      loadedUser = getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
+    } catch (DataAccessException repositoryProblem) {
+      throw new AuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
     }
+
+    if (loadedUser == null) {
+      throw new AuthenticationServiceException(
+          "UserDetailsService returned null, which is an interface contract violation");
+    }
+
+    return loadedUser;
+  }
 
 }

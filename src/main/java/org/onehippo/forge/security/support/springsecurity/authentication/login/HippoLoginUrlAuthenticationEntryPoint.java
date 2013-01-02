@@ -24,18 +24,19 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Hippo Repository based LoginUrlAuthenticationEntryPoint extension.
- * @see org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
  *
- * This class has been overrides to allow the user to login within the Channel Manager
+ * @see org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
+ *      <p/>
+ *      This class has been overrides to allow the user to login within the Channel Manager
  */
 public class HippoLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-    @Override
-    protected String buildRedirectUrlToLoginPage(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
-        String loginForm = determineUrlToUseForThisRequest(request, response, authException);
+  @Override
+  protected String buildRedirectUrlToLoginPage(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
+    String loginForm = determineUrlToUseForThisRequest(request, response, authException);
 
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-        return springSecurityUtils.buildRedirectUrl(loginForm, request);
-    }
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+    return springSecurityUtils.buildRedirectUrl(loginForm, request);
+  }
 
 }

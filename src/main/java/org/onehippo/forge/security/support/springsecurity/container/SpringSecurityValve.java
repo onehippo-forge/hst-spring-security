@@ -42,104 +42,104 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class SpringSecurityValve implements Valve {
-    
-    private static Logger log = LoggerFactory.getLogger(SpringSecurityValve.class);
-    
-    private boolean storeSubjectRepositoryCredentials = true;
-    
-    public boolean isStoreSubjectRepositoryCredentials() {
-        return storeSubjectRepositoryCredentials;
+
+  private static Logger log = LoggerFactory.getLogger(SpringSecurityValve.class);
+
+  private boolean storeSubjectRepositoryCredentials = true;
+
+  public boolean isStoreSubjectRepositoryCredentials() {
+    return storeSubjectRepositoryCredentials;
+  }
+
+  public void setStoreSubjectRepositoryCredentials(boolean storeSubjectRepositoryCredentials) {
+    this.storeSubjectRepositoryCredentials = storeSubjectRepositoryCredentials;
+  }
+
+  public void initialize() throws ContainerException {
+  }
+
+  public void destroy() {
+  }
+
+  public void invoke(ValveContext context) throws ContainerException {
+    HttpServletRequest request = context.getServletRequest();
+    Principal userPrincipal = request.getUserPrincipal();
+
+    if (userPrincipal == null) {
+      if (log.isDebugEnabled()) {
+        log.debug("No user principal found. Skipping SpringSecurityValve...");
+      }
+      context.invokeNext();
+      return;
     }
 
-    public void setStoreSubjectRepositoryCredentials(boolean storeSubjectRepositoryCredentials) {
-        this.storeSubjectRepositoryCredentials = storeSubjectRepositoryCredentials;
+    HttpSession session = request.getSession(false);
+    Subject subject = (session != null ? (Subject) session.getAttribute(ContainerConstants.SUBJECT_ATTR_NAME) : null);
+
+    if (subject != null) {
+      if (log.isDebugEnabled()) {
+        log.debug("Already subject has been created somewhere before. Skipping SpringSecurityValve...");
+      }
+      context.invokeNext();
+      return;
     }
 
-    public void initialize() throws ContainerException {
+    SecurityContext securityContext = SecurityContextHolder.getContext();
+
+    if (securityContext == null) {
+      if (log.isDebugEnabled()) {
+        log.debug("Spring Security hasn't establish security context. Skipping SpringSecurityValve...");
+      }
+      context.invokeNext();
+      return;
     }
 
-    public void destroy() {
+    Authentication authentication = securityContext.getAuthentication();
+
+    if (authentication == null) {
+      if (log.isWarnEnabled()) {
+        log.warn("Spring Security hasn't establish security context with authentication object. Skipping SpringSecurityValve...");
+      }
+      context.invokeNext();
+      return;
     }
 
-    public void invoke(ValveContext context) throws ContainerException {
-        HttpServletRequest request = context.getServletRequest();
-        Principal userPrincipal = request.getUserPrincipal();
-        
-        if (userPrincipal == null) {
-            if (log.isDebugEnabled()) {
-                log.debug("No user principal found. Skipping SpringSecurityValve...");
-            }
-            context.invokeNext();
-            return;
-        }
-        
-        HttpSession session = request.getSession(false);
-        Subject subject = (session != null ? (Subject) session.getAttribute(ContainerConstants.SUBJECT_ATTR_NAME) : null);
-        
-        if (subject != null) {
-            if (log.isDebugEnabled()) {
-                log.debug("Already subject has been created somewhere before. Skipping SpringSecurityValve...");
-            }
-            context.invokeNext();
-            return;
-        }
-        
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        
-        if (securityContext == null) {
-            if (log.isDebugEnabled()) {
-                log.debug("Spring Security hasn't establish security context. Skipping SpringSecurityValve...");
-            }
-            context.invokeNext();
-            return;
-        }
-        
-        Authentication authentication = securityContext.getAuthentication();
-        
-        if (authentication == null) {
-            if (log.isWarnEnabled()) {
-                log.warn("Spring Security hasn't establish security context with authentication object. Skipping SpringSecurityValve...");
-            }
-            context.invokeNext();
-            return;
-        }
-        
-        Object springSecurityPrincipal = authentication.getPrincipal();
-        
-        if (!(springSecurityPrincipal instanceof UserDetails)) {
-            if (log.isWarnEnabled()) {
-                log.warn("Spring Security hasn't establish security context with UserDetails object. We don't support non UserDetails authentication. Skipping SpringSecurityValve...");
-            }
-            context.invokeNext();
-            return;
-        }
-        
-        UserDetails userDetails = (UserDetails) springSecurityPrincipal;
-        
-        User user = new TransientUser(userPrincipal.getName());
-        
-        Set<Principal> principals = new HashSet<Principal>();
-        principals.add(userPrincipal);
-        principals.add(user);
-        
-        for (GrantedAuthority authority : userDetails.getAuthorities()) {
-            String authorityName = authority.getAuthority();
-            if (!StringUtils.isEmpty(authorityName)) {
-                principals.add(new TransientRole(authorityName));
-            }
-        }
-        
-        Set<Object> pubCred = new HashSet<Object>();
-        Set<Object> privCred = new HashSet<Object>();
-        
-        if (storeSubjectRepositoryCredentials) {
-            Credentials subjectRepoCreds = new SimpleCredentials(userDetails.getUsername(), userDetails.getPassword().toCharArray());
-            privCred.add(subjectRepoCreds);
-        }
-        
-        subject = new Subject(true, principals, pubCred, privCred);
-        request.getSession(true).setAttribute(ContainerConstants.SUBJECT_ATTR_NAME, subject);
-        
-        context.invokeNext();
+    Object springSecurityPrincipal = authentication.getPrincipal();
+
+    if (!(springSecurityPrincipal instanceof UserDetails)) {
+      if (log.isWarnEnabled()) {
+        log.warn("Spring Security hasn't establish security context with UserDetails object. We don't support non UserDetails authentication. Skipping SpringSecurityValve...");
+      }
+      context.invokeNext();
+      return;
     }
+
+    UserDetails userDetails = (UserDetails) springSecurityPrincipal;
+
+    User user = new TransientUser(userPrincipal.getName());
+
+    Set<Principal> principals = new HashSet<Principal>();
+    principals.add(userPrincipal);
+    principals.add(user);
+
+    for (GrantedAuthority authority : userDetails.getAuthorities()) {
+      String authorityName = authority.getAuthority();
+      if (!StringUtils.isEmpty(authorityName)) {
+        principals.add(new TransientRole(authorityName));
+      }
+    }
+
+    Set<Object> pubCred = new HashSet<Object>();
+    Set<Object> privCred = new HashSet<Object>();
+
+    if (storeSubjectRepositoryCredentials) {
+      Credentials subjectRepoCreds = new SimpleCredentials(userDetails.getUsername(), userDetails.getPassword().toCharArray());
+      privCred.add(subjectRepoCreds);
+    }
+
+    subject = new Subject(true, principals, pubCred, privCred);
+    request.getSession(true).setAttribute(ContainerConstants.SUBJECT_ATTR_NAME, subject);
+
+    context.invokeNext();
+  }
 }

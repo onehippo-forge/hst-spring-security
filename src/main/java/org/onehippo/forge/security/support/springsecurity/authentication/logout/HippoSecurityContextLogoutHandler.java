@@ -25,46 +25,47 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Hippo Repository based SecurityContextLogoutHandler extension.
- * @see org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
  *
- * This class has been overrides to allow the user to logout within the Channel Manager
- * and to clear the remember me cookie.
+ * @see org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+ *      <p/>
+ *      This class has been overrides to allow the user to logout within the Channel Manager
+ *      and to clear the remember me cookie.
  */
 public class HippoSecurityContextLogoutHandler extends SecurityContextLogoutHandler {
 
-    @Override
-    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        // By default the cookie is not removed. So the user is still logged-in even if the user clicks on the logout link.
-        Cookie[] cookies = request.getCookies();
+  @Override
+  public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    // By default the cookie is not removed. So the user is still logged-in even if the user clicks on the logout link.
+    Cookie[] cookies = request.getCookies();
 
-        if (cookies != null) {
-            for (Cookie cookieItem : cookies) {
-                if (cookieItem.getName().equals("SPRING_SECURITY_REMEMBER_ME_COOKIE")) {
-                    cookieItem.setMaxAge(0);
-                    response.addCookie(cookieItem);
-                }
-            }
+    if (cookies != null) {
+      for (Cookie cookieItem : cookies) {
+        if (cookieItem.getName().equals("SPRING_SECURITY_REMEMBER_ME_COOKIE")) {
+          cookieItem.setMaxAge(0);
+          response.addCookie(cookieItem);
         }
-
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-
-        // When the user click on the logout link within the channel manager, only the security context should be clear.
-        // The session should not be deleted.
-        if (springSecurityUtils.requestComesFromCms(request)) {
-            setInvalidateHttpSession(false);
-            removeAttributeFromSession(request);
-
-        }
-
-        super.logout(request, response, authentication);
+      }
     }
 
-    /**
-     * Useful when the user is logged-out within the Channel Manager. In this case, the session is not invalidated and
-     * the session's attributes must be removed manually.
-     *
-     * @param request http request
-     */
-    protected void removeAttributeFromSession(HttpServletRequest request) {
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+
+    // When the user click on the logout link within the channel manager, only the security context should be clear.
+    // The session should not be deleted.
+    if (springSecurityUtils.requestComesFromCms(request)) {
+      setInvalidateHttpSession(false);
+      removeAttributeFromSession(request);
+
     }
+
+    super.logout(request, response, authentication);
+  }
+
+  /**
+   * Useful when the user is logged-out within the Channel Manager. In this case, the session is not invalidated and
+   * the session's attributes must be removed manually.
+   *
+   * @param request http request
+   */
+  protected void removeAttributeFromSession(HttpServletRequest request) {
+  }
 }

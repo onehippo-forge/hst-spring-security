@@ -26,21 +26,21 @@ import java.io.IOException;
 
 /**
  * Hippo Repository based SimpleUrlAuthenticationSuccessHandler extension.
- * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
  *
+ * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
  */
 public class HippoSimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws ServletException, IOException {
+  @Override
+  public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                      Authentication authentication) throws ServletException, IOException {
 
-        clearAuthenticationAttributes(request);
+    clearAuthenticationAttributes(request);
 
-        // Use the DefaultSavedRequest URL
-        SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
-        String targetUrl = springSecurityUtils.buildRedirectUrl(getDefaultTargetUrl(), request);
+    // Use the DefaultSavedRequest URL
+    SpringSecurityUtils springSecurityUtils = new SpringSecurityUtils();
+    String targetUrl = springSecurityUtils.buildRedirectUrl(determineTargetUrl(request, response), request);
 
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
-    }
+    getRedirectStrategy().sendRedirect(request, response, targetUrl);
+  }
 }

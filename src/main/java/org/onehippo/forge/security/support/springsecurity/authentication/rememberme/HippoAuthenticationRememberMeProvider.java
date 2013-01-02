@@ -27,41 +27,42 @@ import javax.jcr.Repository;
 
 /**
  * Hippo Repository based RememberMeAuthenticationProvider extension.
+ *
  * @see org.springframework.security.authentication.RememberMeAuthenticationProvider
  */
 public class HippoAuthenticationRememberMeProvider extends RememberMeAuthenticationProvider {
 
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+  protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private Repository systemRepository;
+  private Repository systemRepository;
 
-    private HippoUserDetailsService hippoUserDetailsService;
+  private HippoUserDetailsService hippoUserDetailsService;
 
-    public HippoAuthenticationRememberMeProvider() {
+  public HippoAuthenticationRememberMeProvider() {
+  }
+
+  public void setSystemRepository(Repository systemRepository) {
+    this.systemRepository = systemRepository;
+  }
+
+  public Repository getSystemRepository() {
+    if (systemRepository == null) {
+      systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName());
     }
 
-    public void setSystemRepository(Repository systemRepository) {
-        this.systemRepository = systemRepository;
+    return systemRepository;
+  }
+
+  public void setHippoUserDetailsService(HippoUserDetailsService hippoUserDetailsService) {
+    this.hippoUserDetailsService = hippoUserDetailsService;
+  }
+
+  protected HippoUserDetailsService getHippoUserDetailsService() {
+    if (hippoUserDetailsService == null) {
+      hippoUserDetailsService = new HippoUserDetailsServiceImpl();
+      ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
     }
 
-    public Repository getSystemRepository() {
-        if (systemRepository == null) {
-            systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName());
-        }
-
-        return systemRepository;
-    }
-
-    public void setHippoUserDetailsService(HippoUserDetailsService hippoUserDetailsService) {
-        this.hippoUserDetailsService = hippoUserDetailsService;
-    }
-
-    protected HippoUserDetailsService getHippoUserDetailsService() {
-        if (hippoUserDetailsService == null) {
-            hippoUserDetailsService = new HippoUserDetailsServiceImpl();
-            ((HippoUserDetailsServiceImpl) hippoUserDetailsService).setDefaultRoleName("everybody");
-        }
-
-        return hippoUserDetailsService;
-    }
+    return hippoUserDetailsService;
+  }
 }

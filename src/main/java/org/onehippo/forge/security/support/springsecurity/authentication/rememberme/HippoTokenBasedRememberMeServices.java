@@ -22,14 +22,15 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 
 /**
  * Hippo Repository based TokenBasedRememberMeServices extension.
+ *
  * @see org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices
  */
 public class HippoTokenBasedRememberMeServices extends TokenBasedRememberMeServices {
 
-    @Override
-    protected String retrievePassword(Authentication authentication) {
-        UserDetails userDetails = super.getUserDetailsService().loadUserByUsername(authentication.getName());
+  @Override
+  protected String retrievePassword(Authentication authentication) {
+    UserDetails userDetails = super.getUserDetailsService().loadUserByUsername(authentication.getName());
 
-        return userDetails.getPassword();
-    }
+    return userDetails.getPassword();
+  }
 }
