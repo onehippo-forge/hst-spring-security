@@ -150,6 +150,16 @@
         <beans:property name="defaultTargetUrl" value="/"/>
    </beans:bean>
 
+   <!--
+     When the login failed, the user is redirected to the defaultFailureUrl. You can specify that the user will be redirected
+     to the current login page using the referrer.
+     <beans:bean id="failureHandler"
+                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="NotNullButWeDoNotUseIt"/>
+        <beans:property name="useReferer" value="true"/>
+        <beans:property name="indicatingFailedLogin" value="?loginError=true"/>
+     </beans:bean>
+   -->
    <beans:bean id="failureHandler"
                 class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
      <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
