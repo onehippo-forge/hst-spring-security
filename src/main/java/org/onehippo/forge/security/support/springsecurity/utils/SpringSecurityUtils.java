@@ -16,25 +16,20 @@
 
 package org.onehippo.forge.security.support.springsecurity.utils;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sun.istack.internal.Nullable;
+
 import org.apache.commons.lang.StringUtils;
 import org.hippoecm.hst.configuration.hosting.VirtualHosts;
 import org.hippoecm.hst.configuration.model.HstManager;
-import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.container.ComponentManager;
 import org.hippoecm.hst.core.container.RepositoryNotAvailableException;
-import org.hippoecm.hst.core.internal.HstMutableRequestContext;
-import org.hippoecm.hst.core.internal.HstRequestContextComponent;
-import org.hippoecm.hst.core.linking.HstLink;
-import org.hippoecm.hst.core.linking.HstLinkCreator;
-import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedMount;
 import org.hippoecm.hst.site.HstServices;
 import org.hippoecm.hst.util.HstRequestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Spring security helper class used to retrieve some information about the status of the request within Hippo.
@@ -42,18 +37,26 @@ import javax.servlet.http.HttpServletRequest;
 public class SpringSecurityUtils {
 
   private static final Logger log = LoggerFactory.getLogger(SpringSecurityUtils.class);
-  public static final String DESTINATION = "destination";
 
 
+  @Nullable
   public String getCmsPreviewPrefix() {
     final VirtualHosts virtualHosts = getVirtualHosts();
+
+    if (virtualHosts == null) {
+      return null;
+    }
+
     return virtualHosts.getCmsPreviewPrefix();
   }
 
   public boolean requestComesFromCms(final HttpServletRequest request) {
     final String servletPath = request.getServletPath();
 
-    return servletPath.contains(getCmsPreviewPrefix());
+    String prefix = getCmsPreviewPrefix();
+
+    return prefix != null && servletPath.contains(prefix);
+
   }
 
   public String buildRedirectUrl(final String redirectUrl, final HttpServletRequest request) {

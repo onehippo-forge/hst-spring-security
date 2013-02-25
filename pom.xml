@@ -29,7 +29,7 @@
     <jcr.version>2.0</jcr.version>
     <hippo.hst.version>2.24.07</hippo.hst.version>
     <servlet-api.version>2.4</servlet-api.version>
-    <spring-security.version>3.0.5.RELEASE</spring-security.version>
+    <spring-security.version>3.0.7.RELEASE</spring-security.version>
 
     <commons.lang.version>2.5</commons.lang.version>
     <commons-beanutils.version>1.8.0</commons-beanutils.version>
