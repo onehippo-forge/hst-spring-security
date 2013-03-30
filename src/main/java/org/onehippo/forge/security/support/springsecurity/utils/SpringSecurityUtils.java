@@ -36,126 +36,128 @@ import org.slf4j.LoggerFactory;
  */
 public class SpringSecurityUtils {
 
-  private static final Logger log = LoggerFactory.getLogger(SpringSecurityUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(SpringSecurityUtils.class);
 
 
-  @Nullable
-  public String getCmsPreviewPrefix() {
-    final VirtualHosts virtualHosts = getVirtualHosts();
+    @Nullable
+    public String getCmsPreviewPrefix() {
+        final VirtualHosts virtualHosts = getVirtualHosts();
 
-    if (virtualHosts == null) {
-      return null;
+        if (virtualHosts == null) {
+            return null;
+        }
+
+        return virtualHosts.getCmsPreviewPrefix();
     }
 
-    return virtualHosts.getCmsPreviewPrefix();
-  }
+    public boolean requestComesFromCms(final HttpServletRequest request) {
+        final String servletPath = request.getServletPath();
 
-  public boolean requestComesFromCms(final HttpServletRequest request) {
-    final String servletPath = request.getServletPath();
+        String prefix = getCmsPreviewPrefix();
 
-    String prefix = getCmsPreviewPrefix();
+        return prefix != null && servletPath.contains(prefix);
 
-    return prefix != null && servletPath.contains(prefix);
-
-  }
-
-  public String buildRedirectUrl(final String redirectUrl, final HttpServletRequest request) {
-
-    // The redirectUrl is already fully qualified. No need to create the URL
-    if (StringUtils.startsWith(redirectUrl, "http")) {
-      return redirectUrl;
     }
 
-    final ResolvedMount resolvedMount = getResolvedMount(request);
+    public String buildRedirectUrl(final String redirectUrl, final HttpServletRequest request) {
 
-    final VirtualHosts virtualHosts = getVirtualHosts();
+        // The redirectUrl is already fully qualified. No need to create the URL
+        if (StringUtils.startsWith(redirectUrl, "http")) {
+            return redirectUrl;
+        }
 
-    final boolean isPreview = requestComesFromCms(request);
+        final ResolvedMount resolvedMount = getResolvedMount(request);
 
-    final String baseURL = resolvedMount.getMount().getVirtualHost().getBaseURL(request);
+        final VirtualHosts virtualHosts = getVirtualHosts();
 
-    final StringBuilder urlBuilder = new StringBuilder();
+        final boolean isPreview = requestComesFromCms(request);
 
-    urlBuilder.append(baseURL);
+        final String baseURL = resolvedMount.getMount().getVirtualHost().getBaseURL(request);
 
-    if (resolvedMount.getMount().getVirtualHost().isContextPathInUrl() || isPreview) {
-      urlBuilder.append(request.getContextPath());
+        final StringBuilder urlBuilder = new StringBuilder();
+
+        urlBuilder.append(baseURL);
+
+        if (!StringUtils.contains(redirectUrl, request.getContextPath())) {
+            if (resolvedMount.getMount().getVirtualHost().isContextPathInUrl() || isPreview) {
+                urlBuilder.append(request.getContextPath());
+            }
+
+            urlBuilder.append(resolvedMount.getResolvedMountPath());
+
+            if (isPreview) {
+                urlBuilder.append("/");
+                urlBuilder.append(virtualHosts.getCmsPreviewPrefix());
+            }
+        }
+
+        urlBuilder.append(redirectUrl);
+
+        if (log.isInfoEnabled()) {
+            log.info("url redirect = " + urlBuilder.toString());
+        }
+
+        return urlBuilder.toString();
     }
 
-    urlBuilder.append(resolvedMount.getResolvedMountPath());
 
-    if (isPreview) {
-      urlBuilder.append("/");
-      urlBuilder.append(virtualHosts.getCmsPreviewPrefix());
-    }
+    private ResolvedMount getResolvedMount(final HttpServletRequest req) {
+        final HstManager hstSitesManager = (HstManager) getBean(HstManager.class.getName());
 
-    urlBuilder.append(redirectUrl);
+        final String hostName = HstRequestUtils.getFarthestRequestHost(req);
 
-    if (log.isInfoEnabled()) {
-      log.info("url redirect = " + urlBuilder.toString());
-    }
+        try {
 
-    return urlBuilder.toString();
-  }
+            String servletPath = req.getServletPath();
 
+            if (servletPath == null) {
+                servletPath = "/";
+            }
 
-  private ResolvedMount getResolvedMount(final HttpServletRequest req) {
-    final HstManager hstSitesManager = (HstManager) getBean(HstManager.class.getName());
+            // Check if the
 
-    final String hostName = HstRequestUtils.getFarthestRequestHost(req);
+            if (hstSitesManager != null && StringUtils.isNotEmpty(servletPath)) {
+                return hstSitesManager.getVirtualHosts().matchMount(hostName, req.getContextPath(), servletPath);
+            }
+        } catch (final RepositoryNotAvailableException e) {
+            log.error("Unable to identify the resolved mount.", e);
+        }
 
-    try {
-
-      String servletPath = req.getServletPath();
-
-      if (servletPath == null) {
-        servletPath = "/";
-      }
-
-      // Check if the
-
-      if (hstSitesManager != null && StringUtils.isNotEmpty(servletPath)) {
-        return hstSitesManager.getVirtualHosts().matchMount(hostName, req.getContextPath(), servletPath);
-      }
-    } catch (final RepositoryNotAvailableException e) {
-      log.error("Unable to identify the resolved mount.", e);
-    }
-
-    return null;
-  }
-
-
-  /**
-   * @return the list of virtual hosts.
-   */
-  private
-  @Nullable
-  VirtualHosts getVirtualHosts() {
-    final HstManager hstSitesManager = (HstManager) getBean(HstManager.class.getName());
-
-    if (hstSitesManager != null) {
-      try {
-        return hstSitesManager.getVirtualHosts();
-      } catch (final RepositoryNotAvailableException e) {
         return null;
-      }
     }
 
-    return null;
-  }
 
-  private Object getBean(final String name) {
+    /**
+     * @return the list of virtual hosts.
+     */
+    private
+    @Nullable
+    VirtualHosts getVirtualHosts() {
+        final HstManager hstSitesManager = (HstManager) getBean(HstManager.class.getName());
 
-    // Check if the user can access to this host
-    final ComponentManager componentManager = HstServices.getComponentManager();
+        if (hstSitesManager != null) {
+            try {
+                return hstSitesManager.getVirtualHosts();
+            } catch (final RepositoryNotAvailableException e) {
+                return null;
+            }
+        }
 
-    if (componentManager == null) {
-      log.error("Component Manager is null!!!!!! WE HAVE A BIG ISSUE");
-
-      return null;
+        return null;
     }
 
-    return componentManager.getComponent(name);
-  }
+    private Object getBean(final String name) {
+
+        // Check if the user can access to this host
+        final ComponentManager componentManager = HstServices.getComponentManager();
+
+        if (componentManager == null) {
+            log.error("Component Manager is null!!!!!! WE HAVE A BIG ISSUE");
+
+            return null;
+        }
+
+        return componentManager.getComponent(name);
+    }
 
 }

@@ -73,7 +73,7 @@ public class HippoLogoutFilter extends LogoutFilter {
 
 
     if (springSecurityUtils.requestComesFromCms(request)) {
-      requestPath = request.getServletPath() + "/" + springSecurityUtils.getCmsPreviewPrefix();
+      requestPath = springSecurityUtils.getCmsPreviewPrefix()  + getFilterProcessesUrl();
     }
 
     return uri.endsWith(requestPath);
