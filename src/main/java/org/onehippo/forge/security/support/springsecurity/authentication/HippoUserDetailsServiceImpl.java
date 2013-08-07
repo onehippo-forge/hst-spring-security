@@ -71,7 +71,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
 
   private String rolesOfUserAndGroupQuery = DEFAULT_ROLES_OF_USER_AND_GROUP_QUERY;
 
-  private String defaultRoleName = "everybody";
+  private String defaultRoleName;
 
   private String rolePrefix = "ROLE_";
 
