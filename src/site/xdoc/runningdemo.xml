@@ -43,9 +43,6 @@ $ mvn -P cargo.run
             <li>
             When you click 'Log In' link, you will get to the login page which is configured in /WEB-INF/applicationContext-security.xml.
           </li>
-          <li>
-
-          </li>
         </ul>
       </subsection>
     </section>
