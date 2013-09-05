@@ -10,40 +10,40 @@
     License for the specific language governing permissions and
     limitations under the License.
   --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
-        "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
 <document>
-    <properties>
-        <title>Configuration</title>
-    </properties>
-    <body>
-        <section name="Configuration">
-            <subsection name="Configure Spring Web Application Context with Spring Security Configuration">
-                <p>
-                    First you need to configure Spring Web Application Context in your web.xml.
-                </p>
-                <source><![CDATA[
+  <properties>
+    <title>Configuration</title>
+  </properties>
+  <body>
+    <section name="Configuration">
+      <subsection name="Configure Spring Web Application Context with Spring Security Configuration">
+        <p>
+          First you need to configure Spring Web Application Context in your web.xml.
+        </p>
+        <source><![CDATA[
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
   <display-name>Example HST SITE Web Application</display-name>
 
   <!-- ... -->
-  
-  <!-- 
+
+  <!--
     Configure Spring Web Application Context configuration files.
-    You should include your spring security configuration in any file(s) in the following. 
+    You should include your spring security configuration in any file(s) in the following.
   -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
       /WEB-INF/applicationContext.xml
-      /WEB-INF/applicationContext-security.xml      
+      /WEB-INF/applicationContext-security.xml
     </param-value>
   </context-param>
 
   <!-- ... -->
-  
-  <!-- 
+
+  <!--
     Configure Spring Security Filter.
     Usually you may just copy and paste the following into your web application descriptor.
   -->
@@ -53,8 +53,8 @@
   </filter>
 
   <!-- ... -->
-  
-  <!-- 
+
+  <!--
     Configure Spring Security Filter Mapping.
     Usually you may just copy and paste the following into your web application descriptor.
   -->
@@ -65,28 +65,28 @@
   </filter-mapping>
 
   <!-- ... -->
-  
+
   <!--
     Configure Spring Web Application Context Loader Listener.
   -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  
+
   <!-- ... -->
 
 </web-app>
         ]]></source>
-            </subsection>
-            <subsection name="Configuring Spring Web Application Context">
-                <p>
-                    You may put any beans in your Spring Web Application Context configuration.
-                    In this example, we assume you will add your custom beans in /WEB-INF/applicationContext.xml.
-                </p>
-                <source><![CDATA[
+      </subsection>
+      <subsection name="Configuring Spring Web Application Context">
+        <p>
+          You may put any beans in your Spring Web Application Context configuration.
+          In this example, we assume you will add your custom beans in /WEB-INF/applicationContext.xml.
+        </p>
+        <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-       xmlns:lang="http://www.springframework.org/schema/lang" 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:aop="http://www.springframework.org/schema/aop"
@@ -95,232 +95,48 @@
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-  <!-- You may add any beans here. -->  
+  <!-- You may add any beans here. -->
 
 </beans>
         ]]></source>
-            </subsection>
-            <subsection name="Configuring Spring Security">
-                <p>
-                    Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
-                </p>
-                <source><![CDATA[
+      </subsection>
+      <subsection name="Configuring Spring Security">
+        <p>
+          Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
+        </p>
+        <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
   <!-- HTTP Security Configuration -->
-  <http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint">
-        <intercept-url pattern="/secureresource" access="ROLE_everybody"/>
-
-        <custom-filter position="LOGOUT_FILTER" ref="customLogoutFilter"/>
-        <custom-filter position="REMEMBER_ME_FILTER" ref="customRememberMeFilter"/>
-        <custom-filter position="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter"/>
-  </http>
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Login Entry Point
-  -->
-  <beans:bean id="loginUrlAuthenticationEntryPoint"
-       class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoLoginUrlAuthenticationEntryPoint">
-    <beans:property name="loginFormUrl" value="/login.jsp"/>
-  </beans:bean>
-
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Form Login Filter
-  -->
-   <beans:bean id="customUsernamePasswordAuthenticationFilter"
-                class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUsernamePasswordAuthenticationFilter">
-     <beans:property name="authenticationManager" ref="authenticationManager"/>
-     <beans:property name="authenticationFailureHandler" ref="failureHandler"/>
-     <beans:property name="authenticationSuccessHandler" ref="successHandler"/>
-     <beans:property name="rememberMeServices" ref="rememberMeServices"/>
-   </beans:bean>
-
-   <beans:bean id="successHandler"
-           class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationSuccessHandler">
-        <beans:property name="defaultTargetUrl" value="/"/>
-   </beans:bean>
-
-   <!--
-     When the login failed, the user is redirected to the defaultFailureUrl. You can specify that the user will be redirected
-     to the current login page using the referrer.
-     <beans:bean id="failureHandler"
-                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
-        <beans:property name="defaultFailureUrl" value="NotNullButWeDoNotUseIt"/>
-        <beans:property name="useReferer" value="true"/>
-        <beans:property name="indicatingFailedLogin" value="?loginError=true"/>
-     </beans:bean>
-   -->
-   <beans:bean id="failureHandler"
-                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
-     <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
-   </beans:bean>
-
-
-  <!--
-    Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider').
-    However, you can use any other authentication provider(s) if you don't need to authenticate users against Hippo Repository.
-  -->
-  <authentication-manager alias="authenticationManager">
-    <authentication-provider ref="hippoAuthenticationProvider" />
-    <!-- Needed if you want the remember me feature-->
-    <authentication-provider ref="hippoAuthenticationRememberMeProvider" />
-  </authentication-manager>
-  
-  <!-- 
-    Hippo Repository based Authentication Provider. This Authentication Provider provide authentication against Hippo Repository Security Store.
-    If you don't need to authenticate users against Hippo Repository, you don't have to include the following bean. 
-  -->
-  <beans:bean id="hippoAuthenticationProvider" 
-              class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
-  </beans:bean>
-
-  <!--
-    Hippo Repository based Authentication Remember Me Provider. This Authentication Provider support of remember me against Hippo Repository Security Store.
-    If you don't need to use the remember me feature, you don't have to include the following bean.
-  -->
-  <beans:bean id="hippoAuthenticationRememberMeProvider"
-            class="org.onehippo.forge.security.support.springsecurity.authentication.rememberme.HippoAuthenticationRememberMeProvider">
-    <beans:property name="hippoUserDetailsService" ref="hippoUserServiceDetailsService"/>
-    <beans:property name="key" value="hipporemembermekey2012"/>
-  </beans:bean>
-
-  <beans:bean name="hippoUserServiceDetailsService" class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUserDetailsServiceImpl">
-     <beans:property name="defaultRoleName" value="everybody"/>
-  </beans:bean>
-
-  <beans:bean id="customRememberMeFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
-      <beans:property name="rememberMeServices" ref="rememberMeServices"/>
-      <beans:property name="authenticationManager" ref="authenticationManager"/>
-  </beans:bean>
-
-
-  <beans:bean id="rememberMeServices" class="org.onehippo.forge.security.support.springsecurity.authentication.rememberme.HippoTokenBasedRememberMeServices">
-      <beans:property name="userDetailsService" ref="hippoUserServiceDetailsService"/>
-      <beans:property name="key" value="hipporemembermekey2012"/>
-      <beans:property name="tokenValiditySeconds" value="31536000"/>
-  </beans:bean>
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Logout Filter
-  -->
-  <beans:bean id="customLogoutFilter" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoLogoutFilter">
-    <!-- if logout succeed then this is the URL -->
-    <beans:constructor-arg ref="logoutSuccessHandler"/>
-    <beans:constructor-arg>
-        <beans:array>
-            <beans:ref bean="hippoLogoutHandler"/>
-        </beans:array>
-    </beans:constructor-arg>
-    <beans:property name="filterProcessesUrl" value="/j_spring_security_logout"/>
-  </beans:bean>
-
-  <beans:bean id="hippoLogoutHandler" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoSecurityContextLogoutHandler"/>
-
-  <beans:bean id="logoutSuccessHandler" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoLogoutSuccessHandler">
-    <beans:property name="defaultTargetUrl" value="/"/>
-  </beans:bean>
-
-
-</beans:beans>
-        ]]></source>
-                <p>
-                    In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into
-                    the authentication-manager in order to
-                    use Hippo Repository based authentication.
-                    If you want to use other authentication provider(s), you don't have to include the
-                    hippoAuthenticationProvider.
-                </p>
-                <p>
-                    Please refer to Spring Security Documentation for detailed guidelines on Spring Security
-                    configurations.
-                </p>
-            </subsection>
-            <subsection name="Configuring Spring Security - Protect the entire site">
-                <p>
-                    Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
-                </p>
-                <source><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
-
-  <!-- HTTP Security Configuration -->
-  <http auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint">
-    <!-- Channel Manager -->
-    <intercept-url pattern="/_rp/**" filters="none"/>
-    <intercept-url pattern="/_cmsrest/**" filters="none"/>
-    <intercept-url pattern="/_cmsinternal/security*" filters="none"/>
-
+  <http auto-config="true">
     <intercept-url pattern="/css/**" filters="none"/>
     <intercept-url pattern="/images/**" filters="none"/>
     <intercept-url pattern="/binaries/**" filters="none"/>
     <intercept-url pattern="/login.jsp*" filters="none"/>
-    <intercept-url pattern="/**" access="ROLE_everybody"/>
-
-    <custom-filter position="LOGOUT_FILTER" ref="customLogoutFilter"/>
-    <custom-filter position="REMEMBER_ME_FILTER" ref="customRememberMeFilter"/>
-    <custom-filter position="FORM_LOGIN_FILTER" ref="customUsernamePasswordAuthenticationFilter"/>
+    <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY, ROLE_everybody" />
+    <form-login login-page="/login.jsp"
+                default-target-url="/home"
+                always-use-default-target="true" />
+    <logout logout-url="/logout.jsp" />
   </http>
-
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Login Entry Point
-  -->
-  <beans:bean id="loginUrlAuthenticationEntryPoint"
-       class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoLoginUrlAuthenticationEntryPoint">
-    <beans:property name="loginFormUrl" value="/login.jsp"/>
-  </beans:bean>
-
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Form Login Filter
-  -->
-   <beans:bean id="customUsernamePasswordAuthenticationFilter"
-                class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUsernamePasswordAuthenticationFilter">
-     <beans:property name="authenticationManager" ref="authenticationManager"/>
-     <beans:property name="authenticationFailureHandler" ref="failureHandler"/>
-     <beans:property name="authenticationSuccessHandler" ref="successHandler"/>
-     <beans:property name="rememberMeServices" ref="rememberMeServices"/>
-   </beans:bean>
-
-   <beans:bean id="successHandler"
-           class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationSuccessHandler">
-        <beans:property name="defaultTargetUrl" value="/"/>
-   </beans:bean>
-
-   <beans:bean id="failureHandler"
-                class="org.onehippo.forge.security.support.springsecurity.authentication.login.HippoSimpleUrlAuthenticationFailureHandler">
-     <beans:property name="defaultFailureUrl" value="/security?loginError=true"/>
-   </beans:bean>
-
 
   <!--
     Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider').
     However, you can use any other authentication provider(s) if you don't need to authenticate users against Hippo Repository.
   -->
-  <authentication-manager alias="authenticationManager">
+  <authentication-manager>
     <authentication-provider ref="hippoAuthenticationProvider" />
-    <!-- Needed if you want the remember me feature-->
-    <authentication-provider ref="hippoAuthenticationRememberMeProvider" />
   </authentication-manager>
 
   <!--
@@ -331,91 +147,38 @@
               class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
   </beans:bean>
 
-  <!--
-    Hippo Repository based Authentication Remember Me Provider. This Authentication Provider support of remember me against Hippo Repository Security Store.
-    If you don't need to use the remember me feature, you don't have to include the following bean.
-  -->
-  <beans:bean id="hippoAuthenticationRememberMeProvider"
-            class="org.onehippo.forge.security.support.springsecurity.authentication.rememberme.HippoAuthenticationRememberMeProvider">
-    <beans:property name="hippoUserDetailsService" ref="hippoUserServiceDetailsService"/>
-    <beans:property name="key" value="hipporemembermekey2012"/>
-  </beans:bean>
-
-  <beans:bean name="hippoUserServiceDetailsService" class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUserDetailsServiceImpl">
-     <beans:property name="defaultRoleName" value="everybody"/>
-  </beans:bean>
-
-  <beans:bean id="customRememberMeFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
-      <beans:property name="rememberMeServices" ref="rememberMeServices"/>
-      <beans:property name="authenticationManager" ref="authenticationManager"/>
-  </beans:bean>
-
-
-  <beans:bean id="rememberMeServices" class="org.onehippo.forge.security.support.springsecurity.authentication.rememberme.HippoTokenBasedRememberMeServices">
-      <beans:property name="userDetailsService" ref="hippoUserServiceDetailsService"/>
-      <beans:property name="key" value="hipporemembermekey2012"/>
-      <beans:property name="tokenValiditySeconds" value="31536000"/>
-  </beans:bean>
-
-  <!--
-    Channel Manager specification. Need to override the default filter.
-
-    Custom Logout Filter
-  -->
-  <beans:bean id="customLogoutFilter" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoLogoutFilter">
-    <!-- if logout succeed then this is the URL -->
-    <beans:constructor-arg ref="logoutSuccessHandler"/>
-    <beans:constructor-arg>
-        <beans:array>
-            <beans:ref bean="hippoLogoutHandler"/>
-        </beans:array>
-    </beans:constructor-arg>
-    <beans:property name="filterProcessesUrl" value="/j_spring_security_logout"/>
-  </beans:bean>
-
-  <beans:bean id="hippoLogoutHandler" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoSecurityContextLogoutHandler"/>
-
-  <beans:bean id="logoutSuccessHandler" class="org.onehippo.forge.security.support.springsecurity.authentication.logout.HippoLogoutSuccessHandler">
-    <beans:property name="defaultTargetUrl" value="/"/>
-  </beans:bean>
-
-
 </beans:beans>
         ]]></source>
-                <p>
-                    In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into
-                    the authentication-manager in order to
-                    use Hippo Repository based authentication.
-                    If you want to use other authentication provider(s), you don't have to include the
-                    hippoAuthenticationProvider.
-                </p>
-                <p>
-                    Please refer to Spring Security Documentation for detailed guidelines on Spring Security
-                    configurations.
-                </p>
-            </subsection>
-            <subsection name="Adding SpringSecurityValve into the Existing Pipeline(s)">
-                <p>
-                    In order to enable Spring Security Integration in your SITE application, you should insert
-                    'SpringSecurityValve' into your existing pipelines.
-                </p>
-                <p>
-                    There might be three different pipelines:
-                </p>
-                <ul>
-                    <li>DefaultSitePipeline: The default website pipeline</li>
-                    <li>JaxrsRestContentPipeline: The Content/Context Aware JAX-RS Service pipeline</li>
-                    <li>JaxrsRestPlainPipeline: The Plain JAX-RS Service pipeline</li>
-                </ul>
-                <p>
-                    In the example below, we just inserted SpringSecurityValve into the default pipeline only.
-                    If you want to enable Spring Security Integration in either of JAX-RS pipelines, you will
-                    need to copy and paste the second bean definition block with changing the pipeline name argument.
-                </p>
-                <source><![CDATA[
+        <p>
+          In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into the authentication-manager in order to
+          use Hippo Repository based authentication.
+          If you want to use other authentication provider(s), you don't have to include the hippoAuthenticationProvider.
+        </p>
+        <p>
+          Please refer to Spring Security Documentation for detailed guidelines on Spring Security configurations.
+        </p>
+      </subsection>
+      <subsection name="Adding SpringSecurityValve into the Existing Pipeline(s)">
+        <p>
+          In order to enable Spring Security Integration in your SITE application, you should insert 'SpringSecurityValve' into your existing pipelines.
+        </p>
+        <p>
+          There might be three different pipelines:
+        </p>
+        <ul>
+          <li>DefaultSitePipeline: The default website pipeline</li>
+          <li>JaxrsRestContentPipeline: The Content/Context Aware JAX-RS Service pipeline</li>
+          <li>JaxrsRestPlainPipeline: The Plain JAX-RS Service pipeline</li>
+        </ul>
+        <p>
+          In the example below, we just inserted SpringSecurityValve into the default pipeline only.
+          If you want to enable Spring Security Integration in either of JAX-RS pipelines, you will
+          need to copy and paste the second bean definition block with changing the pipeline name argument.
+        </p>
+        <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-       xmlns:lang="http://www.springframework.org/schema/lang" 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:aop="http://www.springframework.org/schema/aop"
@@ -423,18 +186,18 @@
                            http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-  
+
   <!-- Defininig SpringSecurityValve -->
-  <bean id="springSecurityValve" class="org.onehippo.forge.security.support.springsecurity.container.SpringSecurityValve"> 
+  <bean id="springSecurityValve" class="org.onehippo.forge.security.support.springsecurity.container.SpringSecurityValve">
   </bean>
-  
-  <!-- 
+
+  <!--
     Inserting SpringSecurityValve into the default pipeline.
     You may copy and paste the following block to insert the SpringSecurityValve for more pipelines.
     'DefaultSitePipeline' is for the default website pipeline.
     'JaxrsRestContentPipeline' is for the Content/Context Aware JAX-RS Service pipeline.
     'JaxrsRestPlainPipeline' is for the Plain JAX-RS Service pipeline.
-  --> 
+  -->
   <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
     <property name="targetObject">
       <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -442,7 +205,7 @@
         <property name="targetMethod" value="getPipeline" />
         <property name="arguments">
           <list>
-            <!-- 
+            <!--
               You may use one of the following: 'DefaultSitePipeline', 'JaxrsRestContentPipeline' and 'JaxrsRestPlainPipeline'.
             -->
             <value>DefaultSitePipeline</value>
@@ -455,48 +218,39 @@
       <ref bean="springSecurityValve" />
     </property>
   </bean>
-  
+
 </beans>
         ]]></source>
-            </subsection>
-            <subsection name="Securing Your Site">
-                <p>
-                    Now, you can secure your web site by setting 'hst:authenticated', 'hst:roles' or 'hst:users' either
-                    'hst:sitemapitem' node or 'hst:mount' node.
-                </p>
-                <p>
-                    For example, if you have 'securedresource' sitemap item, and it has 'hst:authenticated=true' and
-                    'hst:roles=ROLE_admin,ROLE_everybody', then
-                    any requests to the sitemap item will be allowed only authenticated users.
-                </p>
-                <em>
-                    Note: Because the role name with Spring Security should be prefixed by 'ROLE_' by default, you will
-                    need to prefix the role name by the prefix
-                    when configuring the hst:roles property.
-                </em>
-                <p>
-                    HST Spring Security Support supports the same feature for authorization as the default HST-2
-                    Security module provides.
-                    So, please refer to the following link in order to learn how to set authorization.
-                    <ul>
-                        <li>
-                            <a href="https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration">
-                                https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration
-                            </a>
-                        </li>
-                    </ul>
-                </p>
-            </subsection>
-            <subsection name="Using Standard Security APIs">
-                <p>
-                    Also, you can use JavaEE standard Security APIs now in your components or servlet/filter for
-                    programmatic security checks such as:
-                    <ul>
-                        <li>javax.servlet.http.HttpServletRequest#getUserPrincipal()</li>
-                        <li>javax.servlet.http.HttpServletRequest#isUserInRole(java.lang.String role)</li>
-                    </ul>
-                </p>
-            </subsection>
-        </section>
-    </body>
+      </subsection>
+      <subsection name="Securing Your Site">
+        <p>
+          Now, you can secure your web site by setting 'hst:authenticated', 'hst:roles' or 'hst:users' either 'hst:sitemapitem' node or 'hst:mount' node.
+        </p>
+        <p>
+          For example, if you have 'securedresource' sitemap item, and it has 'hst:authenticated=true' and 'hst:roles=ROLE_admin,ROLE_everybody', then
+          any requests to the sitemap item will be allowed only authenticated users.
+        </p>
+        <em>
+          Note: Because the role name with Spring Security should be prefixed by 'ROLE_' by default, you will need to prefix the role name by the prefix
+                when configuring the hst:roles property.
+        </em>
+        <p>
+          HST Spring Security Support supports the same feature for authorization as the default HST-2 Security module provides.
+          So, please refer to the following link in order to learn how to set authorization.
+          <ul>
+            <li><a href="https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration">https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration</a></li>
+          </ul>
+        </p>
+      </subsection>
+      <subsection name="Using Standard Security APIs">
+        <p>
+          Also, you can use JavaEE standard Security APIs now in your components or servlet/filter for programmatic security checks such as:
+          <ul>
+            <li>javax.servlet.http.HttpServletRequest#getUserPrincipal()</li>
+            <li>javax.servlet.http.HttpServletRequest#isUserInRole(java.lang.String role)</li>
+          </ul>
+        </p>
+      </subsection>
+    </section>
+  </body>
 </document>

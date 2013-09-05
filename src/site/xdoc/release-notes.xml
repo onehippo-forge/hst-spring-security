@@ -17,13 +17,6 @@
   </properties>
   <body>
     <section name="Release Notes">
-      <subsection name="0.02.01">
-        <ul>
-            <li>Better support of Spring Security within the Channel Manager</li>
-            <li>Add the support of Remember Me</li>
-            <li>Enable user authentication using their email</li>
-        </ul>
-      </subsection>
       <subsection name="0.01.00">
         <ul>
           <li>Initial release.</li>
