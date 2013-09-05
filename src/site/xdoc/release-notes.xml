@@ -17,6 +17,29 @@
   </properties>
   <body>
     <section name="Release Notes">
+      <subsection name="0.02.05">
+        <ul>
+          <li>
+            Remove project specific components.
+            The followings were removed because they were too project specific and not generic enough:
+            <ul>
+              <li>HippoEmailUserDetailsServiceImpl</li>
+              <li>HippoUserDetailsServiceImpl</li>
+              <li>HippoUsernamePasswordAuthenticationFilter</li>
+              <li>Hippo Specific Authentication Login/Logout/Remember Me filters (HippoLoginFilter, HippoLogoutFilter, HippoTokenBasedRememberMeServices, etc) and components</li>
+            </ul>
+          </li>
+          <li>HIPPLUG-666: Avoid NPE when password is not stored in UserDetails</li>
+          <li>Note: Please do not use the released versions [0.02.01, 0.02.04] because they have some project specific additions which will not be supported in the future.</li>
+        </ul>
+      </subsection>
+      <subsection name="0.02.01">
+        <ul>
+          <li>Better support of Spring Security within the Channel Manager</li>
+          <li>Add the support of Remember Me</li>
+          <li>Enable user authentication using their email</li>
+        </ul>
+      </subsection>
       <subsection name="0.01.00">
         <ul>
           <li>Initial release.</li>
