@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface HippoUserDetailsService extends UserDetailsService {
 
-  UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException, DataAccessException;
+    UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException,
+            DataAccessException;
 
 }

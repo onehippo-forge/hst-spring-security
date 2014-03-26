@@ -137,7 +137,8 @@ public class SpringSecurityValve implements Valve {
             Credentials subjectRepoCreds = null;
 
             if (userDetails.getPassword() != null) {
-                subjectRepoCreds = new SimpleCredentials(userDetails.getUsername(), userDetails.getPassword().toCharArray());
+                subjectRepoCreds = new SimpleCredentials(userDetails.getUsername(), userDetails.getPassword()
+                        .toCharArray());
             } else {
                 subjectRepoCreds = new SimpleCredentials(userDetails.getUsername(), new char[0]);
             }
