@@ -96,6 +96,15 @@
         ]]></source>
         </div>
       </subsection>
+      <subsection name="Alternative to Apache HTTPd Rewriting Rules Configuration">
+        <p>
+          In the previous section, we used RewriteRule with mod_rewrite module in Apache HTTP Server.
+          If you want to manage the rewriting rules at runtime or manage all the rewriting rules in a central location managed
+          by Hippo Repository, then you can consider using 
+          <a href="http://urlrewriter.forge.onehippo.org/" target="_blank">Hippo Forge URL Rewriter Plugin</a>
+          instead of RewriteRule backed by mod_rewrite module.
+        </p>
+      </subsection>
     </section>
   </body>
 </document>
