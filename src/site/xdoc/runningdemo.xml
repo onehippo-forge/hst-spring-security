@@ -21,12 +21,14 @@
         <p>
           You can check out, build and run the demo application like the following:
         </p>
+        <div class="brush: bash">
         <source><![CDATA[
 $ svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec-demo/trunk hst-springsec-demo
 $ cd hst-springsec-demo
 $ mvn install
 $ mvn -P cargo.run
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Testing the Demo Application">
         <ul>

@@ -37,15 +37,21 @@
         <p>
           Check out the trunk source code from the SVN repository:
         </p>
-        <source>svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk hst-springsec</source>
+        <div class="brush: bash">
+        <source>$ svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk hst-springsec</source>
+        </div>
         <p>
           Build the project using Maven:
         </p>
-        <source>mvn install</source>
+        <div class="brush: bash">
+        <source>$ mvn install</source>
+        </div>
         <p>
           Build all the reports and the site (requires Maven 2 or 3):
         </p>
-        <source>mvn site</source>
+        <div class="brush: bash">
+        <source>$ mvn site</source>
+        </div>
       </subsection>
     </section>
   </body>

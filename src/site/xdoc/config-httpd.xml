@@ -1,0 +1,101 @@
+<?xml version="1.0"?><!--
+    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+    applicable law or agreed to in writing, software distributed under
+    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+    OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and
+    limitations under the License.
+  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+<document>
+  <properties>
+    <title>Configuring Apache HTTPd</title>
+  </properties>
+  <body>
+    <section name="Configuring Apache HTTPd">
+      <subsection name="Introduction">
+        <p>
+          When you run your SITE web application as a non-ROOT web application (with a non-empty context path like '/site')
+          behind an Apache HTTP Server, if you want to map root context path to your SITE web application path
+          (e.g, '/**' -> '/site/**' and vice versa), then you should take a careful look at the reverse proxy and rewriting configurations.
+        </p>
+        <p>
+          Unlike HST-2 container itself, Spring Security Framework is very sensitive to the servlet context path.
+          Therefore, you have to put additional HTTPd configurations for your spring-security enabled HST-2 site web application.
+        </p>
+      </subsection>
+      <subsection name="Configuring Rewriting and Reverse Proxy">
+        <p>
+          When you run your SITE web application as a non-ROOT web application behind an Apache HTTP Server,
+          you will probably have configurations like the following example
+          (Ref: <a href="http://www.onehippo.org/7_8/library/deployment/configuring/configure-apache-httpd-web-server-for-sites.html" target="_blank">Configure Apache httpd web server for site(s)</a>):
+        </p>
+        <div class="brush: xml">
+        <source><![CDATA[
+<VirtualHost  *:80>
+  ServerName www.example.com
+  ServerAlias *.example.com
+
+  ProxyPreserveHost  On
+  ProxyPass  / http://127.0.0.1:8080/site/
+  ProxyPassReverse  / http://127.0.0.1:8080/site/
+  ProxyPassReverseCookiePath  /site /
+</VirtualHost>
+        ]]></source>
+        </div>
+        <p>
+          The configuration shown above is not good enough with Spring Security Framework
+          because Spring Security Framework always redirects to a login page URL with prepending it with the context path (e.g, '/site').
+          Then, the request is redirected to '/site/login.jsp' for instance, which actually results in http://127.0.0.1/site/site/login.jsp in the end.
+          This could lead to an infinite redirction when you set the login page URL to '/login.jsp' as a context relative path in Spring Security Framework configuration.
+        </p>
+        <p>
+          Therefore, one solution would be to add a redirection rule to redirect /site/** to /* forcefully like the following example:
+        </p>
+        <div class="brush: xml">
+        <source><![CDATA[
+<VirtualHost  *:80>
+
+  # -->8--SNIP -->8--
+
+  # Rewrite security requests by Spring Security, since Spring Security is context-aware
+  RewriteEngine on
+  RewriteRule ^/site/(.*)$ /$1 [R=301]
+
+  # -->8--SNIP -->8--
+
+</VirtualHost>
+        ]]></source>
+        </div>
+        <p>
+          In the example above, using the RewriteRule combined with a 301 redirection, you can secure your website,
+          while still reverse-proxying your Spring Security enabled web application correctly.
+        </p>
+        <p>
+          Here is a full configuration example with the rewriting rule and reverse proxy configurations:
+        </p>
+        <div class="brush: xml">
+        <source><![CDATA[
+<VirtualHost  *:80>
+  ServerName www.example.com
+  ServerAlias *.example.com
+
+  # Rewrite security requests by Spring Security, since Spring Security is context-aware
+  RewriteEngine on
+  RewriteRule ^/site/(.*)$ /$1 [R=301]
+
+  ProxyPreserveHost  On
+  ProxyPass  / http://127.0.0.1:8080/site/
+  ProxyPassReverse  / http://127.0.0.1:8080/site/
+  ProxyPassReverseCookiePath  /site /
+</VirtualHost>
+        ]]></source>
+        </div>
+      </subsection>
+    </section>
+  </body>
+</document>

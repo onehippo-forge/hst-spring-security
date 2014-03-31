@@ -21,6 +21,7 @@
         <p>
           First you need to configure Spring Web Application Context in your web.xml.
         </p>
+        <div class="brush: xml">
         <source><![CDATA[
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
@@ -77,12 +78,14 @@
 
 </web-app>
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Configuring Spring Web Application Context">
         <p>
           You may put any beans in your Spring Web Application Context configuration.
           In this example, we assume you will add your custom beans in /WEB-INF/applicationContext.xml.
         </p>
+        <div class="brush: xml">
         <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -99,11 +102,13 @@
 
 </beans>
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Configuring Spring Security">
         <p>
           Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
         </p>
+        <div class="brush: xml">
         <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
@@ -149,6 +154,7 @@
 
 </beans:beans>
         ]]></source>
+        </div>
         <p>
           In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into the authentication-manager in order to
           use Hippo Repository based authentication.
@@ -175,6 +181,7 @@
           If you want to enable Spring Security Integration in either of JAX-RS pipelines, you will
           need to copy and paste the second bean definition block with changing the pipeline name argument.
         </p>
+        <div class="brush: xml">
         <source><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -221,6 +228,7 @@
 
 </beans>
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Securing Your Site">
         <p>

@@ -24,14 +24,17 @@
       </subsection>
       <subsection name="Maven 2 repository">
         <p>Add this repository to your root pom.xml:</p>
+        <div class="brush: xml">
         <source><![CDATA[
     <repository>
       <id>hippo-maven2-forge</id>
       <name>Hippo Maven 2 Forge</name>
       <url>http://maven.onehippo.com/maven2-forge</url>
     </repository>]]></source>
+        </div>
       </subsection>
       <subsection name="Adding Spring Framework Dependencies to your project">
+        <div class="brush: xml">
         <source><![CDATA[
     <!-- 
       The HST Spring Security Support requires Spring Framework Libraries.
@@ -45,8 +48,10 @@
       <version>${hippo.hst.version}</version>
     </dependency>
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Adding Spring Security Dependencies to your project">
+        <div class="brush: xml">
         <source><![CDATA[
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -72,8 +77,10 @@
       <version>${spring.security.version}</version>
     </dependency>
         ]]></source>
+        </div>
       </subsection>
       <subsection name="Adding HST Spring Security Support Dependencies to your project">
+        <div class="brush: xml">
         <source><![CDATA[
     <dependency>
       <groupId>org.onehippo.forge.hst-springsec</groupId>
@@ -81,6 +88,7 @@
       <version>${hst-springsec.version}</version>
     </dependency>
         ]]></source>
+        </div>
       </subsection>
     </section>
   </body>
