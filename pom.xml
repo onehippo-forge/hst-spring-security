@@ -14,15 +14,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <name>HST Spring Security Support</name>
   <description>HST Spring Security Support Components</description>
   <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
-  <version>0.03.00-SNAPSHOT</version>
+  <version>0.03.00</version>
   <url>http://hst-springsec.forge.onehippo.org/</url>
 
   <properties>
@@ -92,9 +91,9 @@
   </developers>
 
   <scm>
-    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</connection>
-    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</developerConnection>
-    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</url>
+    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.00</connection>
+    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.00</developerConnection>
+    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.00</url>
   </scm>
 
   <issueManagement>
