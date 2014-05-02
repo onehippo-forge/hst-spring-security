@@ -49,9 +49,8 @@
     <section name="Release Notes">
       <subsection name="0.03.00">
         <ul>
-          <li>
-            Coming soon...
-          </li>
+          <li>Upgrading Spring Security Framework dependency and Hippo CMS 7.8</li>
+          <li>Adding URL exclusions example in demo to bypass authentication on requests from Channel Manager</li>
         </ul>
       </subsection>
       <subsection name="0.02.05">
