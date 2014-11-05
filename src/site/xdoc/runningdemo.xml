@@ -36,6 +36,12 @@ $ mvn -P cargo.run
             By default, you cannot navigate any page except of login form page without authentication.
             Please refer to the configuration in /WEB-INF/applicationContext-security.xml for the access configuration.
           </li>
+          <li>
+            If you sign in by admin/admin, then you will be able to navigate all the pages.
+            However, if you sign in by editor/editor, then you will be able to navigate all the pages except of '/site/about' page
+            because the /about sitemap item is configured with 'hst:authenticated' = true and 'hst:roles' = [ 'ROLE_admin' ] in the demo.
+            When you visit '/site/about' after signing in by editor/editor, you will get an <a href="http://en.wikipedia.org/wiki/HTTP_403">HTTP 403</a> error.
+          </li>
         </ul>
       </subsection>
     </section>
