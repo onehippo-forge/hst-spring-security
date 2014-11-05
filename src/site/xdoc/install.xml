@@ -19,7 +19,7 @@
     <section name="How to use HST Spring Security Support">
       <subsection name="Prerequisites">
         <p>
-          These instruction assumes that you have maven 2 or 3 based build for your site.
+          These instruction assumes that you have maven 3 based build for your site.
         </p>
       </subsection>
       <subsection name="Maven 2 repository">
