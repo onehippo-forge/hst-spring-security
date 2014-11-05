@@ -47,6 +47,12 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="0.03.01">
+        <ul>
+          <li>Let SpringSecurityValve extend <code>org.hippoecm.hst.core.container.AbstractBaseOrderableValve</code></li>
+          <li>Polishing demo project and improving site/javadoc documentation</li>
+        </ul>
+      </subsection>
       <subsection name="0.03.00">
         <ul>
           <li>Upgrading Spring Security Framework dependency and Hippo CMS 7.8</li>
