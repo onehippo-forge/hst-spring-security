@@ -106,7 +106,17 @@
       </subsection>
       <subsection name="Configuring Spring Security">
         <p>
-          Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml:
+          Here's an example of Spring Security configuration in /WEB-INF/applicationContext-security.xml.
+        </p>
+        <p>
+          <strong><em>Note:</em></strong>
+          In the following example, 'hippoAuthenticationProvider' bean is used 
+          as the default Spring Security authentication provider component.
+          The 'hippoAuthenticationProvider' simply authenticates users against Hippo Repository user/group store.
+          If you want to authenticate users against other security stores such as LDAP, RDBMS, etc.,
+          then you should configure other authentication provider component instead.
+          Please refer to <a href="http://projects.spring.io/spring-security/" target="_blank">Spring Security</a>
+          documentation site for other available authentication providers.
         </p>
         <div class="brush: xml">
         <source><![CDATA[
@@ -173,29 +183,29 @@
 </beans:beans>
         ]]></source>
         </div>
-        <p>
-          In the example above, you should add the 'hippoAuthenticationProvider' bean and configure it into the authentication-manager in order to
-          use Hippo Repository based authentication.
-          If you want to use other authentication provider(s), you don't have to include the hippoAuthenticationProvider.
-        </p>
-        <p>
-          Please refer to Spring Security Documentation for detailed guidelines on Spring Security configurations.
-        </p>
       </subsection>
       <subsection name="Adding SpringSecurityValve into the Existing Pipeline(s)">
         <p>
           In order to enable Spring Security Integration in your SITE application, you should insert 'SpringSecurityValve' into your existing pipelines.
         </p>
         <p>
-          There might be three different pipelines:
+          Basically, <code>SpringSecurityValve</code> is responsible for
+          reading the <code>org.springframework.security.core.Authentication</code> instance if exists,
+          and establishing <code>javax.security.auth.Subject</code> for the whole HST-2 request processing
+          by converting <code>org.springframework.security.core.userdetails.UserDetails</code> into a set of
+          <code>java.security.Principal</code>s
+          (user principal and role principals from the collection of <code>org.springframework.security.core.GrantedAuthority</code>).
+        </p>
+        <p>
+          There can be three different pipelines in your project:
         </p>
         <ul>
           <li>DefaultSitePipeline: The default website pipeline</li>
-          <li>JaxrsRestContentPipeline: The Content/Context Aware JAX-RS Service pipeline</li>
           <li>JaxrsRestPlainPipeline: The Plain JAX-RS Service pipeline</li>
+          <li>JaxrsRestContentPipeline: The Content/Context Aware JAX-RS Service pipeline</li>
         </ul>
         <p>
-          In the example below, we just inserted SpringSecurityValve into the default pipeline only.
+          In the example below, we append SpringSecurityValve to the initializing valves of the default pipeline only.
           If you want to enable Spring Security Integration in either of JAX-RS pipelines, you will
           need to copy and paste the second bean definition block with changing the pipeline name argument.
         </p>
@@ -217,7 +227,7 @@
   </bean>
 
   <!--
-    Inserting SpringSecurityValve into the default pipeline.
+    Appending SpringSecurityValve to the initializing valves of the the default pipeline.
     You may copy and paste the following block to insert the SpringSecurityValve for more pipelines.
     'DefaultSitePipeline' is for the default website pipeline.
     'JaxrsRestContentPipeline' is for the Content/Context Aware JAX-RS Service pipeline.
@@ -263,19 +273,19 @@
         <p>
           HST Spring Security Support supports the same feature for authorization as the default HST-2 Security module provides.
           So, please refer to the following link in order to learn how to set authorization.
-          <ul>
-            <li><a href="https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration">https://wiki.onehippo.com/display/CMS7/HST-2+Authentication+and+Authorization+Support#HST-2AuthenticationandAuthorizationSupport-5.AuthorizationConfiguration</a></li>
-          </ul>
         </p>
+        <ul>
+          <li><a href="http://www.onehippo.org/library/concepts/security/hst-2-authentication-and-authorization-support.html">HST-2 Authentication and Authorization Support</a>.</li>
+        </ul>
       </subsection>
       <subsection name="Using Standard Security APIs">
         <p>
           Also, you can use JavaEE standard Security APIs now in your components or servlet/filter for programmatic security checks such as:
-          <ul>
-            <li>javax.servlet.http.HttpServletRequest#getUserPrincipal()</li>
-            <li>javax.servlet.http.HttpServletRequest#isUserInRole(java.lang.String role)</li>
-          </ul>
         </p>
+        <ul>
+          <li><code>javax.servlet.http.HttpServletRequest#getUserPrincipal()</code></li>
+          <li><code>javax.servlet.http.HttpServletRequest#isUserInRole(java.lang.String role)</code></li>
+        </ul>
       </subsection>
     </section>
   </body>

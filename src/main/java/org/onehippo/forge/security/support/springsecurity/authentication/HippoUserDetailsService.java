@@ -20,8 +20,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/**
+ * Interface extending <code>UserDetailsService</code>
+ * for integrating with Hippo Repository user/group store.
+ */
 public interface HippoUserDetailsService extends UserDetailsService {
 
+    /**
+     * Load <code>UserDetails</code> by username and password.
+     * 
+     * @param username
+     * @param password
+     * @return
+     * @throws UsernameNotFoundException
+     * @throws DataAccessException
+     */
     UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException,
             DataAccessException;
 

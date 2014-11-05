@@ -31,6 +31,10 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * <code>AuthenticationProvider</code> implementation which authenticates users
+ * against Hippo Repository user/group store.
+ */
 public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     private Repository systemRepository;

@@ -19,7 +19,7 @@
     <section name="Introduction">
       <subsection name="What is HST Spring Security Support?">
         <p>
-          <a href="http://static.springsource.org/spring-security/site/index.html" target="_blank">Spring Security</a>
+          <a href="http://projects.spring.io/spring-security/" target="_blank">Spring Security</a>
           is a powerful and highly customizable authentication and access-control framework.
         </p>
         <p>
