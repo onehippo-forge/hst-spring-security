@@ -33,18 +33,8 @@ $ mvn -P cargo.run
       <subsection name="Testing the Demo Application">
         <ul>
           <li>
-            You may navigate to 'home', 'about' and 'news' pages without authentication.
+            By default, you cannot navigate any page except of login form page without authentication.
             Please refer to the configuration in /WEB-INF/applicationContext-security.xml for the access configuration.
-          </li>
-            <li>
-              You will be redirected to the 'Log In' page if you visit 'Secured Resource' page without logging in.
-              <br/>
-              For your information, if you set different roles for the sitemap item, then you may meet 'HTTP 403 Forbidden' error
-              for the restriced sitemap item even though you're authenticated.
-            </li>
-            <li>
-              When you click 'Log In' link and submit the login form with a valid credentials,
-              you will get to the login page which is configured in /WEB-INF/applicationContext-security.xml.
           </li>
         </ul>
       </subsection>
