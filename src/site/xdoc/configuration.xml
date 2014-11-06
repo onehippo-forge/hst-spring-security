@@ -224,6 +224,7 @@
 
   <!-- Defininig SpringSecurityValve -->
   <bean id="springSecurityValve" class="org.onehippo.forge.security.support.springsecurity.container.SpringSecurityValve">
+    <property name="valveName" value="springSecurityValve" />
   </bean>
 
   <!--
