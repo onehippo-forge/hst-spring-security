@@ -21,7 +21,7 @@
   <description>HST Spring Security Support Components</description>
   <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
-  <version>0.03.01</version>
+  <version>0.03.02-SNAPSHOT</version>
   <url>http://hst-springsec.forge.onehippo.org/</url>
 
   <properties>
@@ -91,9 +91,9 @@
   </developers>
 
   <scm>
-    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.01</connection>
-    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.01</developerConnection>
-    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/tags/hst-springsec-0.03.01</url>
+    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</connection>
+    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</developerConnection>
+    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</url>
   </scm>
 
   <issueManagement>
