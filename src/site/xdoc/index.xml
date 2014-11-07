@@ -24,10 +24,22 @@
         </p>
         <p>
           HST Spring Security Support project provides seamless integration with Spring Security for HST-2 SITE applications.
-          Mainly, HST Spring Security Support project provides an authentication provider against Hippo Repository and
-          a Spring Security aware Security Valve in order to let you leverage Spring Security instead of the default
-          JAAS based security module.
         </p>
+        <p>
+          Mainly, HST Spring Security Support project provides the following:
+        </p>
+        <ul>
+          <li>
+            Authentication Provider which allows authentication against Hippo Repository user/group store.
+            <br/>
+            See <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.html">Javadoc of HippoAuthenticationProvider</a> for detail.
+          </li>
+          <li>
+            Spring Security Valve in order to translate Spring Security Authentication to HST-2 aware Subject.
+            <br/>
+            See <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/container/SpringSecurityValve.html">Javadoc of SpringSecurityValve</a> for detail.
+          </li>
+        </ul>
         <p>
           Because Spring Security provides a lot of out-of-box security integration solutions such as HTTP Basic/Digest authentication,
           LDAP, Form-based, Open ID, JA-SIG CAS authentication, you can take advantage of those with HST-2!
