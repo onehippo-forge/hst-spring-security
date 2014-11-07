@@ -231,8 +231,8 @@
     Appending SpringSecurityValve to the initializing valves of the the default pipeline.
     You may copy and paste the following block to insert the SpringSecurityValve for more pipelines.
     'DefaultSitePipeline' is for the default website pipeline.
-    'JaxrsRestContentPipeline' is for the Content/Context Aware JAX-RS Service pipeline.
     'JaxrsRestPlainPipeline' is for the Plain JAX-RS Service pipeline.
+    'JaxrsRestContentPipeline' is for the Content/Context Aware JAX-RS Service pipeline.
   -->
   <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
     <property name="targetObject">
