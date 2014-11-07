@@ -1,0 +1,120 @@
+<?xml version="1.0"?><!--
+    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+    applicable law or agreed to in writing, software distributed under
+    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+    OR CONDITIONS OF ANY KIND, either express or implied. See the
+    License for the specific language governing permissions and
+    limitations under the License.
+  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
+  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+<document>
+  <properties>
+    <title>Detail on HippoAuthenticationProvider component</title>
+  </properties>
+  <body>
+
+    <section name="Detail on HippoAuthenticationProvider (and HippoUserDetailsService) component">
+
+      <subsection name="Introduction">
+        <p>
+          This page will explain (a) how <code>HippoAuthenticationProvider</code> authenticates a user against Hippo Repository security data store,
+          (b) how <code>HippoUserDetailsServiceImpl</code> assigns roles for the authenticated user.
+        </p>
+        <p>
+          Also see <a href="apidocs/index.html">API Javadoc</a> for details or customizations.
+        </p>
+      </subsection>
+
+      <subsection name="How to authenticate a user?">
+        <p>
+          It is really simple!
+          <code>HippoAuthenticationProvider</code> simply tries to invoke on <code>javax.jcr.Repository#login(Credentials)</code>
+          by converting <code>username</code> and <code>UsernamePasswordAuthenticationToken</code> instance to <code>SimpleCredentials</code> instance.
+        </p>
+        <p>
+          If the login is sucessful, then the user should be authenticated. Otherwise, the authentication should fail.
+        </p>
+        <p>
+          See <a href="apidocs/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.html">HippoAuthenticationProvider</a> for detail.
+        </p>
+      </subsection>
+
+      <subsection name="How to assign roles to an authenticated user?">
+        <p>
+          It is a bit complex.
+          <code>HippoUserDetailsServiceImpl</code> simply executes the following JCR query first to find all the assigned group names:
+        </p>
+        <div class="brush: plain">
+        <source><![CDATA[
+//element(*, hipposys:group)[(@hipposys:members = '${username}' or @hipposys:members = '*')
+and @hipposys:securityprovider = 'internal'];
+        ]]></source>
+        </div>
+        <p>
+          <em><strong>Note: </strong></em> the ${username} is replaced by the real username at runtime.
+        </p>
+
+        <p>
+          Afterward, <code>HippoUserDetailsServiceImpl</code> executes a JCR query like the following example again
+          to find all the <code>hipposys:authrole</code> nodes under <code>/hippo:configuration/hippo:domains</code>.
+        </p>
+        <div class="brush: plain">
+        <source><![CDATA[
+//hippo:configuration/hippo:domains/${domainName}/element(*, hipposys:authrole)
+[ @hipposys:users = '${username}' or @hipposys:groups = 'author' or @hipposys:groups = 'editor' ... ]
+        ]]></source>
+        </div>
+        <p>
+          <em><strong>Note: </strong></em>
+          the ${domainName} is replaced by the property, <a href="apidocs/org/onehippo/forge/security/support/springsecurity/authentication/HippoUserDetailsServiceImpl.html#setRoleDomainName(java.lang.String)">roleDomainName</a> ('everywhere' by default),
+          and the ${username} is replaced by the real username at runtime,
+          and the parts after 'or @hipposys:groups = ' are appended at runtime based on all the group names which were found in the previous step.
+          So, for example, if the domainName is 'everywhere', the username is 'jdoe' and the user is in both 'author' and 'editor' groups,
+          then the JCR query to execute should be like the following:
+        </p>
+        <div class="brush: plain">
+        <source><![CDATA[
+//hippo:configuration/hippo:domains/everywhere/element(*, hipposys:authrole)
+[ @hipposys:users = 'jdoe' or @hipposys:groups = 'author' or @hipposys:groups = 'editor' ]
+        ]]></source>
+        </div>
+        <p>
+          Next, in each <code>hipposys:authrole</code> node under the specified domain node (/hippo:configuration/hippo:domains/everywhere/ by default),
+          <code>HippoUserDetailsServiceImpl</code> reads <code>hipposys:role</code> property.
+        </p>
+        <p>
+          A role name will be the concatenation of the role prefix property ('ROLE_' by default) and the <code>hipposys:role</code> property value.
+        </p>
+        <p>
+          For example, suppose the JCR query above resulted in:
+        </p>
+        <ul>
+          <li>
+            /hippo:configuration/hippo:domains/everywhere/hippo:authrole
+            <br/>
+            &nbsp;&nbsp;- hipposys:role = "editor"
+          </li>
+          <li>
+            /hippo:configuration/hippo:domains/everywhere/hippo:authrole
+            <br/>
+            &nbsp;&nbsp;- hipposys:role = "admin"
+          </li>
+        </ul>
+        <p>
+          Then, the end result of role names in <code>HippoUserDetailsServiceImpl</code> will be like the following set by default:
+        </p>
+        <div class="brush: javascript">
+        <source><![CDATA[
+[ "ROLE_editor", "ROLE_admin" ]
+        ]]></source>
+        </div>
+      </subsection>
+
+    </section>
+
+  </body>
+</document>

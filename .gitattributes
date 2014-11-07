@@ -56,6 +56,7 @@ src/site/site.xml -text svneol=unset#text/plain
 src/site/xdoc/build-from-source.xml -text svneol=unset#text/plain
 src/site/xdoc/config-httpd.xml -text
 src/site/xdoc/configuration.xml -text svneol=unset#text/plain
+src/site/xdoc/hippouserdetails.xml -text
 src/site/xdoc/index.xml -text svneol=unset#text/plain
 src/site/xdoc/install.xml -text svneol=unset#text/plain
 src/site/xdoc/release-notes.xml -text svneol=unset#text/plain
