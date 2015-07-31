@@ -29,11 +29,11 @@ public interface HippoUserDetailsService extends UserDetailsService {
     /**
      * Load <code>UserDetails</code> by username and password.
      * 
-     * @param username
-     * @param password
-     * @return
-     * @throws UsernameNotFoundException
-     * @throws DataAccessException
+     * @param username username
+     * @param password password
+     * @return UserDetails instance
+     * @throws UsernameNotFoundException if user is not found
+     * @throws DataAccessException if data is not available
      */
     UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException,
             DataAccessException;

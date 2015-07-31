@@ -65,7 +65,7 @@ public class SpringSecurityValve extends AbstractOrderableValve {
 
     /**
      * Returns true if the option to store JCR credentials as Subject's private credentials is turned on.
-     * @return
+     * @return true if the option to store JCR credentials as Subject's private credentials is turned on
      */
     public boolean isStoreSubjectRepositoryCredentials() {
         return storeSubjectRepositoryCredentials;
@@ -73,7 +73,7 @@ public class SpringSecurityValve extends AbstractOrderableValve {
 
     /**
      * Sets the flag whether or not to store JCR credentials as Subject's private credentials.
-     * @return
+     * @param storeSubjectRepositoryCredentials flag whether or not to store subject repository credentials
      */
     public void setStoreSubjectRepositoryCredentials(boolean storeSubjectRepositoryCredentials) {
         this.storeSubjectRepositoryCredentials = storeSubjectRepositoryCredentials;
