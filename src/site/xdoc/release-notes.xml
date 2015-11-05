@@ -30,6 +30,11 @@
           </th>
         </tr>
         <tr>
+          <td>1.1.x</td>
+          <td>4.0.x.RELEASE</td>
+          <td>10.0.x, 10.1.x</td>
+        </tr>
+        <tr>
           <td>0.03.xx</td>
           <td>3.2.x.RELEASE</td>
           <td>7.8, 7.9</td>
@@ -47,6 +52,11 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="1.1.0">
+        <ul>
+          <li>Coming Soon... compatible with Spring Security 4.0.x and Hippo CMS 10</li>
+        </ul>
+      </subsection>
       <subsection name="0.03.01">
         <ul>
           <li>Let SpringSecurityValve extend <code>org.hippoecm.hst.core.container.AbstractBaseOrderableValve</code></li>
