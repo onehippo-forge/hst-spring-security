@@ -92,9 +92,9 @@
   </developers>
 
   <scm>
-    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</connection>
-    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</developerConnection>
-    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk</url>
+    <connection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/branches/hst-springsec-0.03.xx</connection>
+    <developerConnection>scm:svn:https://forge.onehippo.org/svn/hst-springsec/hst-springsec/branches/hst-springsec-0.03.xx</developerConnection>
+    <url>https://forge.onehippo.org/svn/hst-springsec/hst-springsec/branches/hst-springsec-0.03.xx</url>
   </scm>
 
   <issueManagement>
