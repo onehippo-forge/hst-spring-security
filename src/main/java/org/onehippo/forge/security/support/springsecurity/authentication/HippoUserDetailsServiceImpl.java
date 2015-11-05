@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -248,7 +248,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
             while (nodeIt.hasNext()) {
                 String roleName = nodeIt.nextNode().getProperty("hipposys:role").getString();
                 String prefixedRoleName = (rolePrefix != null ? rolePrefix + roleName : roleName);
-                authorities.add(new GrantedAuthorityImpl(prefixedRoleName));
+                authorities.add(new SimpleGrantedAuthority(prefixedRoleName));
 
                 if (defaultRoleName != null && !defaultRoleAdded && roleName.equals(defaultRoleName)) {
                     defaultRoleAdded = true;
@@ -257,7 +257,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
 
             if (defaultRoleName != null && !defaultRoleAdded) {
                 String prefixedRoleName = (rolePrefix != null ? rolePrefix + defaultRoleName : defaultRoleName);
-                authorities.add(new GrantedAuthorityImpl(prefixedRoleName));
+                authorities.add(new SimpleGrantedAuthority(prefixedRoleName));
             }
         } finally {
             if (session != null) {
