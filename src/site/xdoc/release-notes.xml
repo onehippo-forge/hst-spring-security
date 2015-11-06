@@ -54,7 +54,7 @@
     <section name="Release Notes">
       <subsection name="1.1.0">
         <ul>
-          <li>Coming Soon... compatible with Spring Security 4.0.x and Hippo CMS 10</li>
+          <li>Compatible with Spring Security 4.0.x and Hippo CMS 10</li>
         </ul>
       </subsection>
       <subsection name="0.03.01">
