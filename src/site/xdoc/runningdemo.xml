@@ -38,9 +38,9 @@ $ mvn -P cargo.run
           </li>
           <li>
             If you sign in by admin/admin, then you will be able to navigate all the pages.
-            However, if you sign in by editor/editor, then you will be able to navigate all the pages except of '/site/about' page
-            because the /about sitemap item is configured with 'hst:authenticated' = true and 'hst:roles' = [ 'ROLE_admin' ] in the demo.
-            When you visit '/site/about' after signing in by editor/editor, you will get an <a href="http://en.wikipedia.org/wiki/HTTP_403">HTTP 403</a> error.
+          </li>
+          <li>
+            If you click on logout button, then you will be logged out and navigated back to the login page.
           </li>
         </ul>
       </subsection>
