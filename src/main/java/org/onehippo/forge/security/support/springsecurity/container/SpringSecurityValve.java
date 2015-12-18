@@ -113,7 +113,7 @@ public class SpringSecurityValve extends AbstractOrderableValve {
         // If there's no Spring Security Context object, then just move to next valve chain.
         if (securityContext == null) {
             if (log.isDebugEnabled()) {
-                log.debug("Spring Security hasn't establish security context. Skipping SpringSecurityValve...");
+                log.debug("Spring Security hasn't established security context. Skipping SpringSecurityValve...");
             }
             context.invokeNext();
             return;
