@@ -189,6 +189,47 @@
         ]]></source>
         </div>
       </subsection>
+      <subsection name="Configuring HippoUserDetailsService explicitly">
+        <p>
+          The <code>hippoAuthenticationProvider</code> bean shown above creates a <code>HippoUserDetailsService</code> bean automatically
+          with default property values
+          if not provided explicitly through bean configurations.
+        </p>
+        <p>
+          You can also define <code>HippoUserDetailsService</code> bean explicitly like the following example and inject it
+          to <code>hippoAuthenticationProvider</code> bean for more detailed configuration:
+        </p>
+        <div class="brush: xml">
+        <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-4.1.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+  <!-- SNIP -->
+
+  <beans:bean id="hippoUserDetailsService" class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUserDetailsServiceImpl">
+    <beans:property name="defaultRoleName" value="everybody" />
+    <beans:property name="roleDomainName" value="everywhere" />
+  </beans:bean>
+
+  <beans:bean id="hippoAuthenticationProvider"
+              class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
+    <beans:property name="hippoUserDetailsService" ref="hippoUserDetailsService" />
+  </beans:bean>
+
+</beans:beans>
+        ]]></source>
+        </div>
+      </subsection>
       <subsection name="Adding SpringSecurityValve into the Existing Pipeline(s)">
         <p>
           In order to enable Spring Security Integration in your SITE application, you should insert 'SpringSecurityValve' into your existing pipelines.
