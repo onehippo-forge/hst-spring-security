@@ -52,6 +52,11 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="1.1.1">
+        <ul>
+          <li>Use delegating repository instead of pooling repository when authenticating a user.</li>
+        </ul>
+      </subsection>
       <subsection name="1.1.0">
         <ul>
           <li>Compatible with Spring Security 4.0.x and Hippo CMS 10</li>
