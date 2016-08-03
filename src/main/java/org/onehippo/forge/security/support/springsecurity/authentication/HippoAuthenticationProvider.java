@@ -50,7 +50,7 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
 
     public Repository getSystemRepository() {
         if (systemRepository == null) {
-            systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName());
+            systemRepository = HstServices.getComponentManager().getComponent(Repository.class.getName() + ".delegating");
         }
 
         return systemRepository;
