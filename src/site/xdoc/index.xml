@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
-    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2016 Hippo Licensed under the Apache License, Version 2.0
     (the "License"); you may not use this file except in compliance with
     the License. You may obtain a copy of the License at
 
@@ -9,8 +10,8 @@
     OR CONDITIONS OF ANY KIND, either express or implied. See the
     License for the specific language governing permissions and
     limitations under the License.
-  --><!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN"
-  "http://maven.apache.org/dtd/xdoc_1_0.dtd">
+  -->
+<!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN" "http://maven.apache.org/dtd/xdoc_1_0.dtd">
 <document>
   <properties>
     <title>Introduction</title>
@@ -30,14 +31,14 @@
         </p>
         <ul>
           <li>
-            Authentication Provider which allows authentication against Hippo Repository user/group store.
+            An Authentication Provider which allows authentication against users and groups stored in the Hippo Repository.
             <br/>
-            See <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.html">Javadoc of HippoAuthenticationProvider</a> for detail.
+            See the <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/authentication/HippoAuthenticationProvider.html">Javadoc of HippoAuthenticationProvider</a> for details.
           </li>
           <li>
-            Spring Security Valve in order to translate Spring Security Authentication to HST-2 aware Subject.
+            A Spring Security Valve in order to translate Spring Security Authentication to an HST-2 aware Subject.
             <br/>
-            See <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/container/SpringSecurityValve.html">Javadoc of SpringSecurityValve</a> for detail.
+            See the <a href="http://hst-springsec.forge.onehippo.org/apidocs/org/onehippo/forge/security/support/springsecurity/container/SpringSecurityValve.html">Javadoc of SpringSecurityValve</a> for details.
           </li>
         </ul>
         <p>
