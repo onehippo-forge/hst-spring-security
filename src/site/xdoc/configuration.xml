@@ -110,7 +110,7 @@
         </p>
         <p>
           <strong><em>Note:</em></strong>
-          In the following example, 'hippoAuthenticationProvider' bean is used 
+          In the following example, 'hippoAuthenticationProvider' bean is used
           as the default Spring Security authentication provider component.
           The 'hippoAuthenticationProvider' simply authenticates users against Hippo Repository user/group store.
           If you want to authenticate users against other security stores such as LDAP, RDBMS, etc.,
@@ -161,6 +161,10 @@
     <!-- Example configuration to allow only authenticated access to users having 'ROLE_everybody'. -->
     <intercept-url pattern="/**" access="hasRole('everybody')" />
 
+    <!-- Note: Enable http-basic element instead of form-login if you want to use Basic Authentication. -->
+    <!--
+    <http-basic />
+    -->
     <form-login login-page="/login.jsp"
                 default-target-url="/"
                 always-use-default-target="true" />
