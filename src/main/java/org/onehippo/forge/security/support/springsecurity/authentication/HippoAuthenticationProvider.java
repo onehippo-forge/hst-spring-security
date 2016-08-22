@@ -22,7 +22,6 @@ import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 
 import org.hippoecm.hst.site.HstServices;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ProviderNotFoundException;
@@ -110,8 +109,8 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
 
         try {
             loadedUser = getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);
-        } catch (DataAccessException repositoryProblem) {
-            throw new AuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
+        } catch (Exception e) {
+            throw new AuthenticationServiceException(e.getMessage(), e);
         }
 
         if (loadedUser == null) {

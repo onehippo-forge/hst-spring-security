@@ -15,7 +15,6 @@
  */
 package org.onehippo.forge.security.support.springsecurity.authentication;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,9 +32,7 @@ public interface HippoUserDetailsService extends UserDetailsService {
      * @param password password
      * @return UserDetails instance
      * @throws UsernameNotFoundException if user is not found
-     * @throws DataAccessException if data is not available
      */
-    UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException,
-            DataAccessException;
+    UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException;
 
 }

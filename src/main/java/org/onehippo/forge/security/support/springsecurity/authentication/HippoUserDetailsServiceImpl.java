@@ -33,7 +33,6 @@ import javax.jcr.query.QueryResult;
 import org.hippoecm.hst.site.HstServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -157,12 +156,12 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
         this.rolePrefix = rolePrefix;
     }
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return loadUserByUsernameAndPassword(username, null);
     }
 
     public UserDetails loadUserByUsernameAndPassword(String username, String password)
-            throws UsernameNotFoundException, DataAccessException {
+            throws UsernameNotFoundException {
         User user = null;
         Session session = null;
 
