@@ -53,6 +53,24 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="1.1.2">
+        <ul>
+          <li>
+            Removing <code>org.springframework.dao.DataAccessException</code> in API
+            because it is pulled in by <i>spring-tx jar</i> which is not included by HST-2 any more.
+          </li>
+          <li>
+            Upgrading Spring Security Framework to 4.0.4.
+          </li>
+          <li>
+            Adding dependency exclusions in Spring Security Framework dependencies
+            because it is safer for HST-2 to pull in Spring Framework dependencies.
+          </li>
+          <li>
+            Adding basic authentication example in a commented block.
+          </li>
+        </ul>
+      </subsection>
       <subsection name="1.1.1">
         <ul>
           <li>Use delegating repository instead of pooling repository when authenticating a user.</li>
