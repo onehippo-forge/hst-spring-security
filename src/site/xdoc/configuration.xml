@@ -149,9 +149,11 @@
 
     <!--
       As of Spring Security 4.0, CSRF protection is enabled by default with XML configuration.
-      If you would like to disable CSRF protection, the corresponding XML configuration can be seen below.
+      If you would like to disable CSRF protection, uncomment the corresponding XML configuration below.
     -->
+    <!--
     <csrf disabled="true"/>
+    -->
 
     <!--
       SAMEORIGIN should be set for X-Frame-Options header to allow channel manager to load preview pages in iframe.
