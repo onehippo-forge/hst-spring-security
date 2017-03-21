@@ -15,18 +15,28 @@
  */
 package org.onehippo.forge.security.support.springsecurity.authentication;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Credentials;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
+import javax.jcr.PropertyType;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.Value;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -53,6 +63,10 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
     private static final String DEFAULT_GROUPS_OF_USER_QUERY = "//element(*, hipposys:group)[(@hipposys:members = ''{0}'' or @hipposys:members = ''*'') and @hipposys:securityprovider = ''internal'']";
 
     private static final String DEFAULT_ROLES_OF_USER_AND_GROUP_QUERY = "//hippo:configuration/hippo:domains/{0}/element(*, hipposys:authrole)[ @hipposys:users = ''{1}'' {2}]";
+
+    private static final Set<String> userPropsToExclude = Collections
+            .unmodifiableSet(new HashSet<>(Arrays.asList("hipposys:active", "hipposys:password",
+                    "hipposys:passwordlastmodified", "hipposys:securityprovider")));
 
     private Repository systemRepository;
 
@@ -183,15 +197,17 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
             NodeIterator nodeIt = result.getNodes();
             Node userNode = (nodeIt.hasNext() ? userNode = nodeIt.nextNode() : null);
 
-            String passwordProp = userNode.getProperty("hipposys:password").getString();
-            boolean enabled = userNode.getProperty("hipposys:active").getBoolean();
-            boolean accountNonExpired = true;
-            boolean credentialsNonExpired = true;
-            boolean accountNonLocked = true;
-            Collection<? extends GrantedAuthority> authorities = getGrantedAuthoritiesOfUser(username);
+            if (userNode != null) {
+                String passwordProp = userNode.getProperty("hipposys:password").getString();
+                boolean enabled = userNode.getProperty("hipposys:active").getBoolean();
+                boolean accountNonExpired = true;
+                boolean credentialsNonExpired = true;
+                boolean accountNonLocked = true;
+                Collection<? extends GrantedAuthority> authorities = getGrantedAuthoritiesOfUser(username);
 
-            user = new User(username, password != null ? password : passwordProp, enabled, accountNonExpired,
-                    credentialsNonExpired, accountNonLocked, authorities);
+                user = new HippoUser(username, password != null ? password : passwordProp, enabled, accountNonExpired,
+                        credentialsNonExpired, accountNonLocked, authorities, getUserProperties(userNode));
+            }
         } catch (RepositoryException e) {
             log.warn("Failed to load user.", e);
         } finally {
@@ -270,4 +286,92 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
         return authorities;
     }
 
+    protected Map<String, Object> getUserProperties(final Node userNode) throws RepositoryException {
+        Map<String, Object> userProps = new HashMap<>();
+
+        Property prop;
+        String propName;
+
+        Value[] valArr;
+
+        String[] strValArr;
+        long[] longValArr;
+        BigDecimal[] decValArr;
+        boolean[] boolValArr;
+        Calendar[] dateValArr;
+
+        for (PropertyIterator propIt = userNode.getProperties(); propIt.hasNext(); ) {
+            prop = propIt.nextProperty();
+            propName = prop.getName();
+
+            if (userPropsToExclude.contains(propName)) {
+                continue;
+            }
+
+            if (prop.isMultiple()) {
+                switch (prop.getType()) {
+                case PropertyType.STRING:
+                    valArr = prop.getValues();
+                    strValArr = new String[valArr.length];
+                    for (int i = 0; i < valArr.length; i++) {
+                        strValArr[i] = valArr[i].getString();
+                    }
+                    userProps.put(propName, strValArr);
+                    break;
+                case PropertyType.LONG:
+                    valArr = prop.getValues();
+                    longValArr = new long[valArr.length];
+                    for (int i = 0; i < valArr.length; i++) {
+                        longValArr[i] = valArr[i].getLong();
+                    }
+                    userProps.put(propName, longValArr);
+                    break;
+                case PropertyType.DECIMAL:
+                    valArr = prop.getValues();
+                    decValArr = new BigDecimal[valArr.length];
+                    for (int i = 0; i < valArr.length; i++) {
+                        decValArr[i] = valArr[i].getDecimal();
+                    }
+                    userProps.put(propName, decValArr);
+                    break;
+                case PropertyType.BOOLEAN:
+                    valArr = prop.getValues();
+                    boolValArr = new boolean[valArr.length];
+                    for (int i = 0; i < valArr.length; i++) {
+                        boolValArr[i] = valArr[i].getBoolean();
+                    }
+                    userProps.put(propName, boolValArr);
+                    break;
+                case PropertyType.DATE:
+                    valArr = prop.getValues();
+                    dateValArr = new Calendar[valArr.length];
+                    for (int i = 0; i < valArr.length; i++) {
+                        dateValArr[i] = valArr[i].getDate();
+                    }
+                    userProps.put(propName, dateValArr);
+                    break;
+                }
+            } else {
+                switch (prop.getType()) {
+                case PropertyType.STRING:
+                    userProps.put(propName, prop.getString());
+                    break;
+                case PropertyType.LONG:
+                    userProps.put(propName, prop.getLong());
+                    break;
+                case PropertyType.DECIMAL:
+                    userProps.put(propName, prop.getDecimal());
+                    break;
+                case PropertyType.BOOLEAN:
+                    userProps.put(propName, prop.getBoolean());
+                    break;
+                case PropertyType.DATE:
+                    userProps.put(propName, prop.getDate());
+                    break;
+                }
+            }
+        }
+
+        return userProps;
+    }
 }
