@@ -53,6 +53,18 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="1.1.3">
+        <ul>
+          <li>
+            Fixing NPE when user is not found.
+          </li>
+          <li>
+            Supporting <code>org.onehippo.forge.security.support.springsecurity.authentication.HippoUser</code>
+            providing user's first name, last name and e-mail address
+            as <code>UserDetails</code> object of Spring Security <code>Authentication</code>.
+          </li>
+        </ul>
+      </subsection>
       <subsection name="1.1.2">
         <ul>
           <li>
