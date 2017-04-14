@@ -29,12 +29,6 @@ $ mvn clean site
 The output is in the docs directory; push it and GitHub Pages will serve the site automatically. 
 
 
-## DOCS TODO AFTER PROJECT MOVE FROM SVN
-
-In pom.xml 
-
-- Update https://onehippo-forge.github.io/project-list.html through https://github.com/onehippo-forge/onehippo-forge.github.io
-
 ## DEMO TODO
 
 - if existing, move demo project in SVN as submodule in Git
