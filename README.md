@@ -31,8 +31,9 @@ The output is in the docs directory; push it and GitHub Pages will serve the sit
 
 ## DEMO TODO
 
-- if existing, move demo project in SVN as submodule in Git
+- Demo project is available in [demo](demo/) folder. Follow [Running Demo Application](https://onehippo-forge.github.io/hst-spring-security/runningdemo.html) page.
 
 ## OLD SVN TODO
+
 - first remove all docs, just one page pointing to the new docs (above)
 - remove trunk content and add README.txt with "Moved to https://github.com/onehippo-forge/REPO_NAME"
