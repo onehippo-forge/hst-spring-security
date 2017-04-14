@@ -22,7 +22,7 @@
   <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
   <version>1.1.4-SNAPSHOT</version>
-  <url>http://hst-springsec.forge.onehippo.org/</url>
+  <url>https://onehippo-forge.github.io/hst-spring-security/</url>
 
   <properties>
 
