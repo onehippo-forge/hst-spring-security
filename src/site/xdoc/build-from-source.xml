@@ -28,18 +28,12 @@
           <li>
             <p>Maven 3</p>
           </li>
-          <li>
-            <p>Subversion client</p>
-          </li>
         </ul>
       </subsection>
       <subsection name="Checkout the source code">
         <p>
-          Check out the trunk source code from the SVN repository:
+          Fork me on GitHub: <a href="https://github.com/onehippo-forge/hst-spring-security" target="_blank">https://github.com/onehippo-forge/hst-spring-security</a>.
         </p>
-        <div class="brush: bash">
-        <source>$ svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec/trunk hst-springsec</source>
-        </div>
         <p>
           Build the project using Maven:
         </p>

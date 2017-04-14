@@ -32,7 +32,7 @@
         <p>
           When you run your SITE web application as a non-ROOT web application behind an Apache HTTP Server,
           you will probably have configurations like the following example
-          (Ref: <a href="http://www.onehippo.org/7_8/library/deployment/configuring/configure-apache-httpd-web-server-for-sites.html" target="_blank">Configure Apache httpd web server for site(s)</a>):
+          (Ref: <a href="https://www.onehippo.org/library/deployment/configuring/configure-apache-httpd-as-reverse-proxy-for-hippo.html" target="_blank">Configure Apache httpd web server for site(s)</a>):
         </p>
         <div class="brush: xml">
         <source><![CDATA[
@@ -101,7 +101,7 @@
           In the previous section, we used RewriteRule with mod_rewrite module in Apache HTTP Server.
           If you want to manage the rewriting rules at runtime or manage all the rewriting rules in a central location managed
           by Hippo Repository, then you can consider using 
-          <a href="http://urlrewriter.forge.onehippo.org/" target="_blank">Hippo Forge URL Rewriter Plugin</a>
+          <a href="https://www.onehippo.org/library/concepts/plugins/url-rewriter/about.html" target="_blank">URL Rewriter Plugin</a>
           instead of RewriteRule backed by mod_rewrite module.
         </p>
       </subsection>
