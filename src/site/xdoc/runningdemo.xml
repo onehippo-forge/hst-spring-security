@@ -19,12 +19,18 @@
     <section name="Running Demo Application">
       <subsection name="Check out demo application">
         <p>
-          You can check out, build and run the demo application like the following:
+          Fork me on GitHub: <a href="https://github.com/onehippo-forge/hst-spring-security" target="_blank">https://github.com/onehippo-forge/hst-spring-security</a>.
+        </p>
+        <p>
+          Build the project using Maven:
         </p>
         <div class="brush: bash">
+        <source>$ mvn install</source>
+        </div>
+        <p>And, build and run the demo in the <code>demo</code> subfolder.</p>
+        <div class="brush: bash">
         <source><![CDATA[
-$ svn co https://forge.onehippo.org/svn/hst-springsec/hst-springsec-demo/trunk hst-springsec-demo
-$ cd hst-springsec-demo
+$ cd demo
 $ mvn clean package
 $ mvn -P cargo.run
         ]]></source>
