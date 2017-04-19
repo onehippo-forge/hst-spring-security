@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/onehippo-forge/hst-spring-security.svg?branch=develop)](https://travis-ci.org/onehippo-forge/hst-spring-security)
 
 # HST Spring Security Support
 
