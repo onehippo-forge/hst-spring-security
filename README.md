@@ -30,6 +30,6 @@ $ mvn clean site
 The output is in the docs directory; push it and GitHub Pages will serve the site automatically. 
 
 
-## DEMO TODO
+## Demo Project
 
 - Demo project is available in [demo](demo/) folder. Follow [Running Demo Application](https://onehippo-forge.github.io/hst-spring-security/runningdemo.html) page.
