@@ -16,7 +16,7 @@
   <skin>
     <groupId>org.onehippo.forge.mavenskin</groupId>
     <artifactId>forge-maven-skin</artifactId>
-    <version>2.0.0</version>
+    <version>1.04.00</version>
   </skin>
 
   <custom>
