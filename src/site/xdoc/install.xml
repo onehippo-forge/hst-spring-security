@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    Copyright 2011-2016 Hippo Licensed under the Apache License, Version 2.0
+    Copyright 2011-2017 Hippo Licensed under the Apache License, Version 2.0
     (the "License"); you may not use this file except in compliance with
     the License. You may obtain a copy of the License at
 
@@ -23,8 +23,29 @@
           These instructions assume that you have a maven 3 based build for your site.
         </p>
       </subsection>
+
+      <subsection name="Add the Forge repository configuration">
+        <p>In the main <code>pom.xml</code> of the project, in the <code>repositories</code> section, add this repository if it is not configured there yet.</p>
+        <div class="brush: xml">
+          <source><![CDATA[
+    <repository>
+      <id>hippo-forge</id>
+      <name>Hippo Forge maven 2 repository.</name>
+      <url>https://maven.onehippo.com/maven2-forge/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <layout>default</layout>
+    </repository>
+        ]]></source>
+        </div>
+      </subsection>
+
       <subsection name="Add version properties to the project pom">
-        <p>In the main pom.xml of the project, in the properties section, add these properties. For the correct version numbers, check the <a href="release-notes.html">Release Notes</a> page.</p>
+        <p>In the main <code>pom.xml</code> of the project, in the properties section, add these properties. For the correct version numbers, check the <a href="release-notes.html">Release Notes</a> page.</p>
         <div class="brush: xml">
           <source><![CDATA[
     <spring.security.version>version.number</spring.security.version>
@@ -33,7 +54,7 @@
         </div>
       </subsection>
       <subsection name="Add Spring Framework Dependencies to your project">
-        <p>Check if this dependency already exists in the pom.xml of the site module. Most likely it is already there.</p>
+        <p>Check if this dependency already exists in the <code>pom.xml</code> of the <code>site</code> module. Most likely it is already there.</p>
         <div class="brush: xml">
         <source><![CDATA[
     <!--
@@ -51,7 +72,7 @@
         </div>
       </subsection>
       <subsection name="Add Spring Security Dependencies to your project">
-        <p>Add these to the pom.xml of the site module.</p>
+        <p>Add these to the <code>pom.xml</code> of the <code>site</code> module.</p>
         <div class="brush: xml">
         <source><![CDATA[
     <dependency>
@@ -177,7 +198,7 @@
         </div>
       </subsection>
       <subsection name="Add HST Spring Security Support Dependencies to your project">
-        <p>Add these to the pom.xml of the site module.</p>
+        <p>Add these to the <code>pom.xml</code> of the <code>site</code> module.</p>
         <div class="brush: xml">
         <source><![CDATA[
     <dependency>
