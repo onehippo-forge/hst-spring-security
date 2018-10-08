@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
+    Copyright 2011-2018 Hippo Licensed under the Apache License, Version 2.0
     (the "License"); you may not use this file except in compliance with
     the License. You may obtain a copy of the License at
 
@@ -32,7 +32,10 @@
         </tr>
         <tr>
           <td>1.1.x</td>
-          <td>4.0.4.RELEASE</td>
+          <td>
+            4.2.x.RELEASE for 12.x,<br/>
+            4.0.x.RELEASE for 11.x and 10.x
+          </td>
           <td>12.x, 11.x, 10.x</td>
         </tr>
         <tr>
