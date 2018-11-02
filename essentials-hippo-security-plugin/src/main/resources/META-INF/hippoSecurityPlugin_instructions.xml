@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<instructions xmlns="http://www.onehippo.org/essentials/instructions">
+    <instructionSet group="default">
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/hippo-essentials-spring.xml" target="{{siteOverrideFolder}}/hippo-essentials-spring.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/login.jsp" target="{{siteWebRoot}}/login.jsp"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/applicationContext-security.xml" target="{{siteWebInfRoot}}/applicationContext-security.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/hippo-spring-security-valve.xml" target="{{siteOverrideFolder}}/hippo-spring-security-valve.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/applicationContext.xml" target="{{siteWebInfRoot}}/applicationContext.xml"/>
+    </instructionSet>
+    <instructionSet group="default">
+        <mavenDependency artifactId="spring-security-taglibs" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="spring-security-config" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="spring-security-core" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="hst-springsec" groupId="org.onehippo.forge.hst-springsec" targetPom="site" version="${hst-springsec.version}"/>
+        <mavenDependency artifactId="spring-security-web" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ForgeRepositoryInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ExcludeArtifactsInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.FilterMappingsInstruction"/>
+    </instructionSet>
+</instructions>
