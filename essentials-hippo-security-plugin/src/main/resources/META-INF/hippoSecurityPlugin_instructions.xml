@@ -17,5 +17,6 @@
         <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ForgeRepositoryInstruction"/>
         <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ExcludeArtifactsInstruction"/>
         <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.FilterMappingsInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.AddVersionsInstruction"/>
     </instructionSet>
 </instructions>
