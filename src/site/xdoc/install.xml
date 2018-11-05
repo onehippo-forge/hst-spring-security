@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    Copyright 2011-2017 Hippo Licensed under the Apache License, Version 2.0
+    Copyright 2011-2018 Hippo Licensed under the Apache License, Version 2.0
     (the "License"); you may not use this file except in compliance with
     the License. You may obtain a copy of the License at
 
@@ -24,6 +24,20 @@
         </p>
       </subsection>
 
+      <subsection name="Add essentials plugin to your project">
+        <p>In the essentials pom (<code>essentials/pom.xml</code>) of the project, add following dependency and rebuild the project:
+        </p>
+        <source><![CDATA[
+
+    <dependency>
+      <groupId>org.onehippo.essentials</groupId>
+      <artifactId>essentials-hippo-security-plugin</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+
+         ]]></source>
+      </subsection>
       <subsection name="Add the Forge repository configuration">
         <p>In the main <code>pom.xml</code> of the project, in the <code>repositories</code> section, add this repository if it is not configured there yet.</p>
         <div class="brush: xml">
