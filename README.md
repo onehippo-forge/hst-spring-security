@@ -19,7 +19,30 @@ Because Spring Security provides a lot of out-of-box security integration soluti
 
 ## Demo Project
 
-- Demo project is available in [demo](demo/) folder. Follow [Running Demo Application](https://onehippo-forge.github.io/hst-spring-security/runningdemo.html) page.
+- Demo project is available as Essentials plugin [essentials-hippo-security-plugin](essentials-hippo-security-plugin/) folder. 
+Create an empty project by following [GET STARTED WITH HIPPO CMS](https://www.onehippo.org/trails/getting-started/hippo-essentials-getting-started.html) page.
+
+After empty project is created: 
+
+add following dependency to main project pom *pom.xml*
+```xml
+       <dependency>
+          <groupId>org.onehippo.essentials</groupId>
+          <artifactId>essentials-hippo-security-plugin</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+```
+add following dependency to *essentials/pom.xml*
+
+```xml
+       <repository>
+         <id>hippo-maven2-forge</id>
+         <name>Hippo Maven 2 Forge</name>
+         <url>http://maven.onehippo.com/maven2-forge</url>
+       </repository>
+```
+
+ 
 
 # Documentation (Local)
 
