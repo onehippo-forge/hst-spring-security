@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+[![Build Status](https://travis-ci.org/bloomreach-forge/hst-spring-security.svg?branch=develop)](https://travis-ci.org/bloomreach-forge/hst-spring-security)
+>>>>>>> e5dd7ac... Rename references from hippo-forge to bloomreach-forge; use BloomReach skin for doc site
 
 # HST Spring Security Support
 
@@ -33,7 +37,7 @@ The output is in the ```target/site/``` directory by default. You can open ```ta
 
 # Documentation (GitHub Pages)
 
-Documentation is available at [https://onehippo-forge.github.io/content-export-import/](https://onehippo-forge.github.io/content-export-import/).
+Documentation is available at [https://bloomreach-forge.github.io/content-export-import/](https://bloomreach-forge.github.io/content-export-import/).
 
 You can generate the GitHub pages only from ```master``` branch by this command:
 
