@@ -22,7 +22,7 @@
   <groupId>org.onehippo.forge.hst-springsec</groupId>
   <artifactId>hst-springsec</artifactId>
   <version>1.1.4-SNAPSHOT</version>
-  <url>https://onehippo-forge.github.io/hst-spring-security/</url>
+  <url>https://bloomreach-forge.github.io/hst-spring-security/</url>
 
   <properties>
 
@@ -85,9 +85,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:onehippo-forge/hst-spring-security.git</connection>
-    <developerConnection>scm:git:git@github.com:onehippo-forge/hst-spring-security.git</developerConnection>
-    <url>https://github.com/onehippo-forge/hst-spring-security.git</url>
+    <connection>scm:git:git@github.com:bloomreach-forge/hst-spring-security.git</connection>
+    <developerConnection>scm:git:git@github.com:bloomreach-forge/hst-spring-security.git</developerConnection>
+    <url>https://github.com/bloomreach-forge/hst-spring-security.git</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -98,7 +98,7 @@
 
   <ciManagement>
     <system>Travis CI</system>
-    <url>https://travis-ci.org/onehippo-forge/hst-spring-security</url>
+    <url>https://travis-ci.org/bloomreach-forge/hst-spring-security</url>
   </ciManagement>
 
   <distributionManagement>

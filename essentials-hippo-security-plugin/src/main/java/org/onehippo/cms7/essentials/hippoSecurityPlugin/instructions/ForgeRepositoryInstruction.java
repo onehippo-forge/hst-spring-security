@@ -32,7 +32,7 @@ public class ForgeRepositoryInstruction implements Instruction {
     private static final MavenRepository FORGE_REPOSITORY = new MavenRepository();
     static {
         FORGE_REPOSITORY.setId("hippo-forge");
-        FORGE_REPOSITORY.setName("Hippo Forge maven 2 repository");
+        FORGE_REPOSITORY.setName("Hippo Bloomreach maven 2 repository");
         FORGE_REPOSITORY.setUrl("https://maven.onehippo.com/maven2-forge/");
         final MavenRepository.Policy releasePolicy = new MavenRepository.Policy();
         releasePolicy.setUpdatePolicy("never");
