@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+  <!-- Static Resources -->
+  <http pattern="/css/**" security="none"/>
+  <http pattern="/images/**" security="none"/>
+  <http pattern="/script/**" security="none"/>
+  <http pattern="/binaries/**" security="none"/>
+  <http pattern="/webfiles/**" security="none"/>
+
+  <!-- Channel Manager requests may bypass authentication -->
+  <http pattern="/_rp/**" security="none"/>
+  <http pattern="/_cmsrest/**" security="none"/>
+  <http pattern="/_cmsinternal/**" security="none"/>
+
+  <http auto-config="true" use-expressions="true" disable-url-rewriting="false">
+
+    <!--
+      As of Spring Security 4.0, CSRF protection is enabled by default with XML configuration.
+      If you would like to disable CSRF protection, uncomment the corresponding XML configuration below.
+    -->
+    <!--
+    <csrf disabled="true"/>
+    -->
+
+    <!--
+      SAMEORIGIN should be set for X-Frame-Options header to allow channel manager to load preview pages in iframe.
+      See https://docs.spring.io/spring-security/site/docs/current/reference/html/headers.html#headers-frame-options for detail.
+    -->
+    <headers>
+      <frame-options policy="SAMEORIGIN"/>
+    </headers>
+
+    <!-- Example configuration to allow anonymous access as well as authenticated access. -->
+    <intercept-url pattern="/login.jsp*" access="isAnonymous() or hasRole('everybody')"/>
+    <intercept-url pattern="/logout*" access="isAnonymous() or hasRole('everybody')"/>
+
+    <!-- Example configuration to allow only authenticated access to users having 'ROLE_everybody'. -->
+    <intercept-url pattern="/**" access="hasRole('everybody')"/>
+
+    <!-- Note: Enable http-basic element instead of form-login if you want to use Basic Authentication. -->
+    <!--
+    <http-basic />
+    -->
+    <form-login login-page="/login.jsp"
+                default-target-url="/"
+                always-use-default-target="true"/>
+
+    <logout invalidate-session="true" logout-success-url="/" logout-url="/logout"/>
+
+  </http>
+
+  <!--
+    Authentication Manager configuration with Hippo Repository based Authentication Provider configuration ('hippoAuthenticationProvider').
+    However, you can use any other authentication provider(s) if you don't need to authenticate users against Hippo Repository.
+  -->
+  <authentication-manager>
+    <authentication-provider ref="hippoAuthenticationProvider"/>
+  </authentication-manager>
+
+  <!--
+    Hippo Repository based Authentication Provider. This Authentication Provider provide authentication against Hippo Repository Security Store.
+    If you don't need to authenticate users against Hippo Repository, you don't have to include the following bean.
+  -->
+  <!--
+    <beans:bean id="hippoAuthenticationProvider"
+                class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
+    </beans:bean>
+  -->
+
+
+  <!-- NOTE -->
+
+  <beans:bean id="hippoUserDetailsService" class="org.onehippo.forge.security.support.springsecurity.authentication.HippoUserDetailsServiceImpl">
+    <beans:property name="defaultRoleName" value="everybody"/>
+    <beans:property name="roleDomainName" value="everywhere"/>
+  </beans:bean>
+
+  <beans:bean id="hippoAuthenticationProvider" class="org.onehippo.forge.security.support.springsecurity.authentication.HippoAuthenticationProvider">
+    <beans:property name="hippoUserDetailsService" ref="hippoUserDetailsService"/>
+  </beans:bean>
+
+
+</beans:beans>
