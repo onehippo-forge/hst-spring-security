@@ -23,7 +23,7 @@
     <hippoSkin>
       <!-- Add a 'Fork me on GitHub' ribbon  -->
       <gitHub>
-        <projectId>onehippo-forge/hst-spring-security</projectId>
+        <projectId>bloomreach-forge/hst-spring-security</projectId>
       </gitHub>
     </hippoSkin>
   </custom>
