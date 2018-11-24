@@ -52,7 +52,7 @@
     <!--***START temporary override of versions*** -->
     <!-- ***END temporary override of versions*** -->
 
-    <spring-security.version>4.0.4.RELEASE</spring-security.version>
+    <spring-security.version>4.1.5.RELEASE</spring-security.version>
     <hst-springsec.version>${project.version}</hst-springsec.version>
 
     <essentials.version>2.1.0</essentials.version>
