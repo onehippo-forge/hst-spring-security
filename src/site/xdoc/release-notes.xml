@@ -40,14 +40,10 @@
         </tr>
         <tr>
           <td>1.1.x</td>
-<<<<<<< HEAD
           <td>
             4.2.x.RELEASE for 12.x,<br/>
-            4.0.x.RELEASE for 11.x and 10.x
+            4.0.x.RELEASE for 11.x and 10.x 
           </td>
-=======
-          <td>4.0.4.RELEASE</td>
->>>>>>> 1417bd076e22cf02484399ae52ffa87e82e3842c
           <td>12.x, 11.x, 10.x</td>
         </tr>
         <tr>
