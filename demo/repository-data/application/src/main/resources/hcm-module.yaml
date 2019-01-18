@@ -1,0 +1,6 @@
+group:
+  name: hst-springsec-demo
+  after: hippo-cms
+project: hst-springsec-demo
+module:
+  name: hst-springsec-demo-repository-data-application

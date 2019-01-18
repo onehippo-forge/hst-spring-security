@@ -1,0 +1,7 @@
+/content/gallery/hstspringsecdemo:
+  jcr:primaryType: hippogallery:stdImageGallery
+  jcr:mixinTypes: ['hippo:named', 'mix:referenceable']
+  jcr:uuid: dc200c35-3b0e-440e-a97d-75c9e76192be
+  hippo:name: HST Spring Security Support Demo Project
+  hippostd:foldertype: [new-image-folder]
+  hippostd:gallerytype: ['hippogallery:imageset']
