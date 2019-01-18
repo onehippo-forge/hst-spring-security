@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <!--
-    Copyright 2011 Hippo Licensed under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License. You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0 Unless required by
-    applicable law or agreed to in writing, software distributed under
-    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
-    OR CONDITIONS OF ANY KIND, either express or implied. See the
-    License for the specific language governing permissions and
-    limitations under the License.
-  -->
+  Copyright 2011-2019 BloomReach, Inc. (https://www.bloomreach.com)
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
 <!DOCTYPE document PUBLIC "-//Apache Software Foundation//DTD XDOC 1.0//EN" "http://maven.apache.org/dtd/xdoc_1_0.dtd">
 <document>
   <properties>
@@ -29,6 +32,11 @@
           <th>
             Hippo CMS Release Version
           </th>
+        </tr>
+        <tr>
+          <td>2.0.x</td>
+          <td>5.1.1.RELEASE</td>
+          <td>13.x</td>
         </tr>
         <tr>
           <td>1.1.x</td>
@@ -52,7 +60,15 @@
         </tr>
       </table>
     </section>
-    <section name="Release Notes">
+    <section name="Release Notes (2.x)">
+      <subsection name="2.0.0">
+        <ul>
+          <li>[<a href='https://issues.onehippo.com/browse/HIPFORGE-245'>HIPFORGE-245</a>] -         [HST Spring Security Support] Upgrade for Spring v5
+          </li>
+        </ul>
+      </subsection>
+    </section>
+    <section name="Release Notes (1.x or earlier)">
       <subsection name="1.1.3">
         <ul>
           <li>
