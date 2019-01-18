@@ -1,0 +1,5 @@
+definitions:
+  namespace:
+    hstspringsecdemo:
+      uri: http://www.hstspringsecdemo.com/hstspringsecdemo/nt/1.0
+      cnd: namespaces/hst-springsec-demo.cnd

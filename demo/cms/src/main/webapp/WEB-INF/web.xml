@@ -9,6 +9,10 @@
   <display-name>HST Spring Security Support Demo Project CMS</display-name>
   <description>HST Spring Security Support Demo Project CMS</description>
 
+  <listener>
+    <listener-class>org.hippoecm.hst.platform.container.HstCmsContextLoaderListener</listener-class>
+  </listener>
+
   <context-param>
     <description>The address of the repository</description>
     <param-name>repository-address</param-name>
@@ -27,6 +31,16 @@
     <param-name>repository-config</param-name>
     <param-value>repository.xml</param-value>
   </context-param>
+
+  <filter>
+    <filter-name>HstFilter</filter-name>
+    <filter-class>org.hippoecm.hst.container.HstFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>HstFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
   <!--No concurrent logins-->
   <filter>
@@ -107,7 +121,7 @@
 
   <servlet>
     <servlet-name>AngularResourceServlet</servlet-name>
-    <servlet-class>org.onehippo.cms7.utilities.servlet.ResourceServlet</servlet-class>
+    <servlet-class>org.onehippo.cms7.utilities.servlet.SecureCmsResourceServlet</servlet-class>
     <init-param>
       <param-name>jarPathPrefix</param-name>
       <param-value>/angular</param-value>
@@ -118,19 +132,11 @@
         ^/.*\..*
       </param-value>
     </init-param>
-    <init-param>
-      <!--
-        Cache timeout in seconds. Make sure to increase it in production environments,
-        for example to one day (cacheTimeout = 86400)
-      -->
-      <param-name>cacheTimeout</param-name>
-      <param-value>0</param-value>
-    </init-param>
   </servlet>
 
   <servlet>
     <servlet-name>CKEditorResourceServlet</servlet-name>
-    <servlet-class>org.onehippo.cms7.utilities.servlet.ResourceServlet</servlet-class>
+    <servlet-class>org.onehippo.cms7.utilities.servlet.SecureCmsResourceServlet</servlet-class>
     <init-param>
       <param-name>jarPathPrefix</param-name>
       <param-value>/ckeditor</param-value>
@@ -140,14 +146,6 @@
       <param-value>
         ^/.*\..*
       </param-value>
-    </init-param>
-    <init-param>
-      <!--
-        Cache timeout in seconds. Make sure to increase it in production environments,
-        for example to one day (cacheTimeout = 86400)
-      -->
-      <param-name>cacheTimeout</param-name>
-      <param-value>0</param-value>
     </init-param>
   </servlet>
 
@@ -163,14 +161,6 @@
       <param-value>
         ^/.*\..*
       </param-value>
-    </init-param>
-    <init-param>
-      <!--
-        Cache timeout in seconds. Make sure to increase it in production environments,
-        for example to one day (cacheTimeout = 86400)
-      -->
-      <param-name>cacheTimeout</param-name>
-      <param-value>0</param-value>
     </init-param>
   </servlet>
 

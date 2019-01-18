@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <installerDocument>
-    <name>newsPlugin</name>
-    <dateAdded>2015-11-06T01:48:57.618+09:00</dateAdded>
-    <dateInstalled>2015-11-06T01:48:55.796+09:00</dateInstalled>
+    <dateAdded>2019-01-18T18:50:52.805+09:00</dateAdded>
+    <dateInstalled>2019-01-18T18:50:52.805+09:00</dateInstalled>
     <installationState>installed</installationState>
 </installerDocument>

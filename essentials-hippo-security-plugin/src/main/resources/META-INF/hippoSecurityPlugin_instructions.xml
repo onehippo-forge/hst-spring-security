@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<instructions xmlns="http://www.onehippo.org/essentials/instructions">
+    <instructionSet group="default">
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/hippo-essentials-spring.xml" target="{{siteOverrideFolder}}/hippo-essentials-spring.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/login.jsp" target="{{siteWebRoot}}/login.jsp"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/applicationContext-security.xml" target="{{siteWebInfRoot}}/applicationContext-security.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/hippo-spring-security-valve.xml" target="{{siteOverrideFolder}}/hippo-spring-security-valve.xml"/>
+        <file action="copy" binary="false" overwrite="false" source="siteFiles/applicationContext.xml" target="{{siteWebInfRoot}}/applicationContext.xml"/>
+    </instructionSet>
+    <instructionSet group="default">
+        <mavenDependency artifactId="spring-security-taglibs" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="spring-security-config" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="spring-security-core" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="hst-springsec" groupId="org.onehippo.forge.hst-springsec" targetPom="site" version="${hst-springsec.version}"/>
+        <mavenDependency artifactId="spring-security-web" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ForgeRepositoryInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ExcludeArtifactsInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.FilterMappingsInstruction"/>
+        <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.AddVersionsInstruction"/>
+    </instructionSet>
+</instructions>
