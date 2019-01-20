@@ -33,7 +33,7 @@
     <servlet-api.version>3.0.1</servlet-api.version>
 
     <spring.version>5.1.1.RELEASE</spring.version>
-    <spring-security.version>5.1.1.RELEASE</spring-security.version>
+    <spring-security.version>5.1.2.RELEASE</spring-security.version>
 
     <hippo.commons.version>13.0.0</hippo.commons.version>
     <hippo.hst.version>13.0.0</hippo.hst.version>

@@ -63,7 +63,7 @@
     <!--***START temporary override of versions*** -->
     <!-- ***END temporary override of versions*** -->
 
-    <spring-security.version>5.1.1.RELEASE</spring-security.version>
+    <spring-security.version>5.1.2.RELEASE</spring-security.version>
     <hst-springsec.version>${project.version}</hst-springsec.version>
 
     <essentials.version>13.0.0</essentials.version>
