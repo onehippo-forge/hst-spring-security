@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2018-2019 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,11 @@ import org.onehippo.cms7.essentials.sdk.api.service.MavenModelService;
 import org.onehippo.cms7.essentials.sdk.api.service.MavenRepositoryService;
 
 public class ForgeRepositoryInstruction implements Instruction {
-    
+
     private static final MavenRepository FORGE_REPOSITORY = new MavenRepository();
     static {
         FORGE_REPOSITORY.setId("hippo-forge");
-        FORGE_REPOSITORY.setName("Hippo Bloomreach maven 2 repository");
+        FORGE_REPOSITORY.setName("Hippo Bloomreach Forge Repository");
         FORGE_REPOSITORY.setUrl("https://maven.onehippo.com/maven2-forge/");
         final MavenRepository.Policy releasePolicy = new MavenRepository.Policy();
         releasePolicy.setUpdatePolicy("never");

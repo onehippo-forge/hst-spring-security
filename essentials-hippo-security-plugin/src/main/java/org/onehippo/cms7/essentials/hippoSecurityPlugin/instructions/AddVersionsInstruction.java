@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2018-2019 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ public class AddVersionsInstruction implements Instruction {
             properties.setProperty("spring.security.version", javaProperties.getProperty("spring.security.version"));
 
         } catch (IOException e) {
-            log.error("Error: {}", e);
+            log.error("Error executing versions instruction:", e);
         }
 
         MavenModelUtils.writePom(pomModel, pom);

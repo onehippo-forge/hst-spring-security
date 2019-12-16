@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2018-2019 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ public class ExcludeArtifactsInstruction implements Instruction {
     public Status execute(final Map<String, Object> map) {
 
         try {
-            final File pomFile = projectService.getPomPathForModule(Module.SITE).toFile();
+            final File pomFile = projectService.getPomPathForModule(Module.SITE_WEBAPP).toFile();
             final Document doc = new SAXReader().read(pomFile);
             for (Map.Entry<String, Map.Entry<String, String>> entry : EXCLUDE_MAPPINGS.entries()) {
                 final String artifactId = entry.getKey();
@@ -102,7 +102,7 @@ public class ExcludeArtifactsInstruction implements Instruction {
             Utils.prettyPrint(pomFile, doc.asXML().getBytes());
             return Status.SUCCESS;
         } catch (Exception e) {
-            log.error("Error: {}", e);
+            log.error("Error executing artifacts instruction:", e);
         }
         return Status.FAILED;
     }
