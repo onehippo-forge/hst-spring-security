@@ -25,12 +25,12 @@
   <publishDate format="d MMMM yyyy"/>
 
   <custom>
-    <hippoSkin>
+    <bloomreach>
       <!-- Add a 'Fork me on GitHub' ribbon  -->
       <gitHub>
         <projectId>bloomreach-forge/hst-spring-security</projectId>
       </gitHub>
-    </hippoSkin>
+    </bloomreach>
   </custom>
 
   <body>
