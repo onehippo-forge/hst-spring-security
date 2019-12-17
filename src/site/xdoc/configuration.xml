@@ -149,6 +149,7 @@
   <http pattern="/_rp/**" security="none"/>
   <http pattern="/_cmsrest/**" security="none"/>
   <http pattern="/_cmsinternal/**" security="none"/>
+  <http pattern="/_cmssessioncontext/**" security="none"/>
 
   <http auto-config="true" use-expressions="true" disable-url-rewriting="false">
 
