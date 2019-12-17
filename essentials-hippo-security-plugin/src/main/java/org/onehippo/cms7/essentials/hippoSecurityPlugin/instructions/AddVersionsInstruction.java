@@ -55,7 +55,7 @@ public class AddVersionsInstruction implements Instruction {
         try (final InputStream resourceAsStream = getClass().getResourceAsStream("/version.properties")) {
             javaProperties.load(resourceAsStream);
             final Properties properties = pomModel.getProperties();
-            properties.setProperty("hst-springsec.version", javaProperties.getProperty("hst-springsec.version"));
+            properties.setProperty("hippo.forge.hst-springsec.version", javaProperties.getProperty("hippo.forge.hst-springsec.version"));
             properties.setProperty("spring.security.version", javaProperties.getProperty("spring.security.version"));
 
         } catch (IOException e) {
