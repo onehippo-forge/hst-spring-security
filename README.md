@@ -31,7 +31,7 @@ The output is in the ```target/site/``` directory by default. You can open ```ta
 
 # Documentation (GitHub Pages)
 
-Documentation is available at [bloomreach-forge.github.io/external-document-picker](https://bloomreach-forge.github.io/external-document-picker).
+Documentation is available at [bloomreach-forge.github.io/hst-spring-security](https://bloomreach-forge.github.io/hst-spring-security).
 
 You can generate the GitHub pages only from ```master``` branch by this command:
 
