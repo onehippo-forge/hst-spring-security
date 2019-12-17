@@ -27,7 +27,7 @@
   <description>HST Spring Security Support project provides seamless integration with Spring Security for HST-2 SITE applications.</description>
   <groupId>org.onehippo.essentials</groupId>
   <artifactId>essentials-hippo-security-plugin</artifactId>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>2.1.0</version>
   <properties>
     <essentials.version>13.4.0</essentials.version>
   </properties>
