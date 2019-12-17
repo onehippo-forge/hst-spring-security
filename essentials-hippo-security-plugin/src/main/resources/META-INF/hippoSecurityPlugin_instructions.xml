@@ -27,8 +27,8 @@
         <mavenDependency artifactId="spring-security-taglibs" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
         <mavenDependency artifactId="spring-security-config" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
         <mavenDependency artifactId="spring-security-core" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
-        <mavenDependency artifactId="hst-springsec" groupId="org.onehippo.forge.hst-springsec" targetPom="site" version="${hst-springsec.version}"/>
         <mavenDependency artifactId="spring-security-web" groupId="org.springframework.security" targetPom="site" version="${spring.security.version}"/>
+        <mavenDependency artifactId="hst-springsec" groupId="org.onehippo.forge.hst-springsec" targetPom="site" version="${hippo.forge.hst-springsec.version}"/>
 
         <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ForgeRepositoryInstruction"/>
         <execute class="org.onehippo.cms7.essentials.hippoSecurityPlugin.instructions.ExcludeArtifactsInstruction"/>

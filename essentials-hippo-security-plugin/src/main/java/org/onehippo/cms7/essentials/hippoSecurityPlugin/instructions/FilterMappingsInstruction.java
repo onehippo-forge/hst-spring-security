@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Hippo B.V. (http://www.onehippo.com)
+ * Copyright 2018-2019 Hippo B.V. (http://www.onehippo.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class FilterMappingsInstruction implements Instruction {
     private static final String FILTER_NAME = "springSecurityFilterChain";
     private static final List<String> URL_PATTERNS = Collections.singletonList("/*");
     private static final List<WebXmlService.Dispatcher> DISPATCHERS = Collections.singletonList(WebXmlService.Dispatcher.REQUEST);
-    private static final Module MODULE = Module.SITE;
+    private static final Module MODULE = Module.SITE_WEBAPP;
     private static final Map<String, String> initParams = new HashMap<>();
     public static final String HST_FILTER = "HstFilter";
 
@@ -95,7 +95,7 @@ public class FilterMappingsInstruction implements Instruction {
 
 
         } catch (Exception e) {
-            log.error("Error: {}", e);
+            log.error("Error executing file mappings instruction:", e);
         }
 
 
