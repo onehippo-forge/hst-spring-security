@@ -1,7 +1,0 @@
-definitions:
-  config:
-    /hst:hst/hst:configurations/hstspringsecdemo/hst:workspace/hst:channel:
-      .meta:residual-child-node-category: content
-      jcr:primaryType: hst:channel
-      hst:name: HST Spring Security Support Demo Project
-      hst:type: website
