@@ -351,7 +351,7 @@
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
         <version>${slf4j.version}</version>
-        <scope>test</scope>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
