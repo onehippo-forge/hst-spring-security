@@ -1,12 +1,12 @@
 /*
- *  Copyright 2011 Hippo.
- * 
+ *  Copyright 2011-2020 Hippo.
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,9 +39,6 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
     private Repository systemRepository;
 
     private HippoUserDetailsService hippoUserDetailsService;
-
-    public HippoAuthenticationProvider() {
-    }
 
     public void setSystemRepository(Repository systemRepository) {
         this.systemRepository = systemRepository;
@@ -100,12 +97,14 @@ public class HippoAuthenticationProvider extends AbstractUserDetailsAuthenticati
             throw new ProviderNotFoundException(e.getMessage());
         } finally {
             try {
-                session.logout();
+                if (session != null) {
+                    session.logout();
+                }
             } catch (Exception ignore) {
             }
         }
 
-        UserDetails loadedUser = null;
+        UserDetails loadedUser;
 
         try {
             loadedUser = getHippoUserDetailsService().loadUserByUsernameAndPassword(username, password);

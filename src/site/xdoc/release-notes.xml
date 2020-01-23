@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!--
-  Copyright 2011-2019 BloomReach, Inc. (https://www.bloomreach.com)
- 
+  Copyright 2011-2020 BloomReach, Inc. (https://www.bloomreach.com)
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
- 
+
        http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,6 +40,11 @@
           <td>13.x</td>
         </tr>
         <tr>
+          <td>3.x</td>
+          <td>5.2.1.RELEASE</td>
+          <td>14.x</td>
+        </tr>
+        <tr>
           <td>1.1.x</td>
           <td>
             4.2.x.RELEASE for 12.x,<br/>
@@ -65,6 +70,15 @@
       </table>
     </section>
     <section name="Release Notes">
+      <subsection name="3.0.0">
+        <p class="smallinfo">Release date: 24 January 2020</p>
+        <ul>
+          <li>
+            <a href='https://issues.onehippo.com/browse/HIPFORGE-328'>HIPFORGE-328</a>
+            - Spring Security Support for brXM v14.0
+          </li>
+        </ul>
+      </subsection>
       <subsection name="2.1.0">
         <p class="smallinfo">Release date: 17 December 2019</p>
         <ul>

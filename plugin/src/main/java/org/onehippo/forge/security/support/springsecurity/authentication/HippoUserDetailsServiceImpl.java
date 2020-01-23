@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Hippo.
+ *  Copyright 2011-2020 Hippo.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -186,14 +186,13 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
 
             String statement = MessageFormat.format(getUserQuery(), username);
 
-            if (log.isDebugEnabled()) {
-                log.debug("Searching user with query: " + statement);
-            }
+            log.debug("Searching user with query: {}", statement);
+
 
             Query q = session.getWorkspace().getQueryManager().createQuery(statement, getQueryLanguage());
             QueryResult result = q.execute();
             NodeIterator nodeIt = result.getNodes();
-            Node userNode = (nodeIt.hasNext() ? userNode = nodeIt.nextNode() : null);
+            Node userNode = (nodeIt.hasNext() ? nodeIt.nextNode() : null);
 
             if (userNode != null) {
                 String passwordProp = userNode.getProperty("hipposys:password").getString();
@@ -220,8 +219,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
         return user;
     }
 
-    protected Collection<? extends GrantedAuthority> getGrantedAuthoritiesOfUser(String username)
-            throws LoginException, RepositoryException {
+    protected Collection<? extends GrantedAuthority> getGrantedAuthoritiesOfUser(String username) throws RepositoryException {
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         Session session = null;
 
@@ -234,9 +232,8 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
 
             String statement = MessageFormat.format(getGroupsOfUserQuery(), username);
 
-            if (log.isDebugEnabled()) {
-                log.debug("Searching groups of user with query: " + statement);
-            }
+            log.debug("Searching groups of user with query: {}", statement);
+
 
             Query q = session.getWorkspace().getQueryManager().createQuery(statement, getQueryLanguage());
             QueryResult result = q.execute();
