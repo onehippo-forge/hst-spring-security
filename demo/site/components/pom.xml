@@ -13,7 +13,6 @@
   <description>HST Spring Security Support Demo Project Site Components</description>
 
   <dependencies>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>

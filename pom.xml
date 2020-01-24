@@ -27,19 +27,21 @@
   <properties>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.javaVersion>1.7</project.build.javaVersion>
+    <project.build.javaVersion>1.8</project.build.javaVersion>
 
     <jcr.version>2.0</jcr.version>
-    <servlet-api.version>3.0.1</servlet-api.version>
+    <servlet-api.version>3.1.0</servlet-api.version>
 
-    <spring.version>5.1.1.RELEASE</spring.version>
-    <spring-security.version>5.2.1.RELEASE</spring-security.version>
+    <spring.version>5.1.5.RELEASE</spring.version>
+    <spring-security.version>${spring.version}</spring-security.version>
 
-    <hippo.commons.version>13.0.0</hippo.commons.version>
-    <hippo.hst.version>13.0.0</hippo.hst.version>
+    <hippo.commons.version>14.0.0</hippo.commons.version>
+    <hippo.hst.version>14.0.0</hippo.hst.version>
+    <hippo-services.version>14.0.0</hippo-services.version>
+    <hippo-repository-api.version>14.0.0</hippo-repository-api.version>
 
     <commons.lang.version>2.6</commons.lang.version>
-    <commons-beanutils.version>1.8.0</commons-beanutils.version>
+    <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <commons-proxy.version>1.0</commons-proxy.version>
 
     <lib.junit.version>4.8.2</lib.junit.version>
@@ -61,6 +63,7 @@
     <plugin.source.version>2.2.1</plugin.source.version>
     <plugin.surefire.version>2.17</plugin.surefire.version>
     <plugin.surefire-report.version>2.17</plugin.surefire-report.version>
+
 
   </properties>
 
@@ -126,6 +129,24 @@
   </repositories>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.onehippo.cms7</groupId>
+      <artifactId>hippo-repository-api</artifactId>
+      <version>${hippo-repository-api.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.onehippo.cms7</groupId>
+      <artifactId>hippo-services</artifactId>
+      <version>${hippo-services.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.onehippo.cms7.hst.components</groupId>
+      <artifactId>hst-security</artifactId>
+      <version>${hippo.hst.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>javax.jcr</groupId>

@@ -7,4 +7,3 @@
   hst:parametervalues: ['on', 'hstspringsecdemo:newsdocument', '', desc, 'off', 'on',
     '', '10', 'hstspringsecdemo:date', 'on']
   hst:template: newslist-main-newslist
-  hst:xtype: hst.item

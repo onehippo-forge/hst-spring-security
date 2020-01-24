@@ -1,23 +1,24 @@
 /content/documents/hstspringsecdemo/news:
+  .meta:order-before: events
   jcr:primaryType: hippostd:folder
   jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-  jcr:uuid: ba726afb-6553-4f76-b7d1-09c7eee21187
+  jcr:uuid: c57e209a-a5a1-456e-b82d-ec5cd2e09797
   hippostd:foldertype: [new-news-document, new-news-folder]
-  hippotranslation:id: eb30af07-eeda-4625-9f85-74fec36f9fdb
+  hippotranslation:id: ccbca7f4-98e3-43f9-9d5a-1b676f86f6df
   hippotranslation:locale: en
-  /2019:
+  /2020:
     jcr:primaryType: hippostd:folder
     jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-    jcr:uuid: 460a323e-6167-42dd-a270-fda83bf19d17
+    jcr:uuid: 2b599016-3625-431c-8e5c-115c32900650
     hippostd:foldertype: [new-news-document, new-news-folder]
-    hippotranslation:id: 8c9dd37b-241c-43fc-bdd7-70c62bf15881
+    hippotranslation:id: c50df54c-cab5-4152-b76f-1097f0dc1e88
     hippotranslation:locale: en
     /01:
       jcr:primaryType: hippostd:folder
       jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-      jcr:uuid: 0240e334-d351-4a05-ad0f-a2aa438d56b6
+      jcr:uuid: f34b3b42-3000-49ff-8f89-2618714d2238
       hippostd:foldertype: [new-news-document, new-news-folder]
-      hippotranslation:id: c9ee09d4-8b04-4809-b9f6-838138a7f9b3
+      hippotranslation:id: 47ded831-adae-4c8e-9f89-2ae36e0b9abb
       hippotranslation:locale: en
       /the-medusa-news:
         jcr:primaryType: hippo:handle
@@ -27,7 +28,7 @@
         /the-medusa-news:
           jcr:primaryType: hstspringsecdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 095c63d9-2819-4ef8-8b3c-476a1f667ec7
+          jcr:uuid: 3360f88e-d91e-473d-8d1b-d9776033ad1b
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -36,10 +37,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T13:04:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T13:04:00+01:00
-          hippotranslation:id: 0dfbcdc3-f5e2-4bed-bfcf-78448329bc3a
+          hippotranslation:id: aa614077-1da0-44bc-a10d-d59b4454a578
           hippotranslation:locale: en
           hstspringsecdemo:author: Alfred Anonymous
-          hstspringsecdemo:date: 2019-01-18T18:50:00+09:00
+          hstspringsecdemo:date: 2020-01-23T16:34:00+01:00
           hstspringsecdemo:documenttype: news
           hstspringsecdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -94,7 +95,7 @@
         /2013-harvest:
           jcr:primaryType: hstspringsecdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: f0a7f4ba-08c0-4db6-90b7-d7a06bdf9c09
+          jcr:uuid: 698bf77b-dd3a-4070-9375-e4d7a129dc67
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -103,10 +104,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T14:31:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T14:31:00+01:00
-          hippotranslation:id: 8c0c30a0-cae5-48e7-ae77-b8ab72a1d5a2
+          hippotranslation:id: 93910987-0838-4aa3-9d3a-bcdebfcd6da0
           hippotranslation:locale: en
           hstspringsecdemo:author: Alfred Anonymous
-          hstspringsecdemo:date: 2019-01-18T18:50:00+09:00
+          hstspringsecdemo:date: 2020-01-23T16:34:00+01:00
           hstspringsecdemo:documenttype: news
           hstspringsecdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -161,7 +162,7 @@
         /the-gastropoda-news:
           jcr:primaryType: hstspringsecdemo:newsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 73825b67-28b7-4ded-84e8-ad654e60f0cc
+          jcr:uuid: 134ed107-8219-4342-99e5-82d0d161fa5f
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -170,10 +171,10 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T12:52:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T12:52:00+01:00
-          hippotranslation:id: df6fdd19-c633-4d8c-913a-81c2eac7baac
+          hippotranslation:id: fa55e8ae-5b18-4e01-93f0-0ae36b20f36c
           hippotranslation:locale: en
           hstspringsecdemo:author: Alfred Anonymous
-          hstspringsecdemo:date: 2019-01-18T18:50:00+09:00
+          hstspringsecdemo:date: 2020-01-23T16:34:00+01:00
           hstspringsecdemo:documenttype: news
           hstspringsecdemo:introduction: Lorem ipsum dolor sit amet, consectetur adipisicing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
