@@ -1,5 +1,6 @@
 package org.onehippo.forge.security.support.springsecurity.authentication;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.hippoecm.hst.security.TransientUser;
 import org.hippoecm.hst.security.impl.RepositoryAuthenticationProvider;
 import org.hippoecm.hst.site.HstServices;
@@ -59,7 +60,7 @@ public class HippoUserDetailsServiceImpl implements HippoUserDetailsService {
             throws UsernameNotFoundException {
         User user = null;
         final RepositoryAuthenticationProvider rap = getRepositoryAuthenticationProvider();
-        final TransientUser transientUser = rap.authenticate(username, password != null ? password.toCharArray() : new char[]{});
+        final TransientUser transientUser = rap.authenticate(username, password != null ? password.toCharArray() : ArrayUtils.EMPTY_CHAR_ARRAY);
         if (transientUser == null) {
             throw new UsernameNotFoundException("Could not authenticate user " + username + " against the repository");
         }
