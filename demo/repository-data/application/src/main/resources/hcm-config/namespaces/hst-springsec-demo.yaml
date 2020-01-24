@@ -1,6 +1,0 @@
-definitions:
-  config:
-    /hippo:namespaces/hstspringsecdemo:
-      jcr:primaryType: hipposysedit:namespace
-      jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: 91fdf1df-12a3-4309-a243-abe212819efb

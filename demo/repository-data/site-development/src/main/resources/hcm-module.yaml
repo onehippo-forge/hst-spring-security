@@ -1,6 +1,0 @@
-site: hst-springsec-demo
-group: hst-springsec-demo
-project: hst-springsec-demo
-module:
-  name: hst-springsec-demo-repository-data-site-development
-  after: hst-springsec-demo-repository-data-site

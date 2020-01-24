@@ -1,9 +1,0 @@
-/content/documents/hstspringsecdemo:
-  .meta:order-before: administration
-  jcr:primaryType: hippostd:folder
-  jcr:mixinTypes: ['hippo:named', 'hippotranslation:translated', 'mix:referenceable']
-  jcr:uuid: 8c6964da-b5c9-4c29-ba79-704941f99c7b
-  hippo:name: HST Spring Security Support Demo Project
-  hippostd:foldertype: [new-translated-folder, new-document]
-  hippotranslation:id: 996bcac5-86cf-49b5-a7a3-16a74863e814
-  hippotranslation:locale: en
