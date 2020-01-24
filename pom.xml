@@ -33,6 +33,8 @@
     <essentials.version>14.0.0</essentials.version>
     <hippo.commons.version>14.0.0</hippo.commons.version>
     <hippo.hst.version>14.0.0</hippo.hst.version>
+    <hippo-services.version>14.0.0</hippo-services.version>
+    <hippo-repository-api.version>14.0.0</hippo-repository-api.version>
 
 
     <commons.lang.version>2.6</commons.lang.version>

@@ -32,6 +32,25 @@
   <dependencies>
 
     <dependency>
+      <groupId>org.onehippo.cms7</groupId>
+      <artifactId>hippo-repository-api</artifactId>
+      <version>${hippo-repository-api.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.onehippo.cms7</groupId>
+      <artifactId>hippo-services</artifactId>
+      <version>${hippo-services.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.onehippo.cms7.hst.components</groupId>
+      <artifactId>hst-security</artifactId>
+      <version>${hippo.hst.version}</version>
+    </dependency>
+
+
+    <dependency>
       <groupId>javax.jcr</groupId>
       <artifactId>jcr</artifactId>
       <scope>provided</scope>

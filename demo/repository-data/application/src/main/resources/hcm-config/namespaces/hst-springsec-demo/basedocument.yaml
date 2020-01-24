@@ -1,0 +1,15 @@
+definitions:
+  config:
+    /hippo:namespaces/hstspringsecdemo/basedocument:
+      jcr:primaryType: hipposysedit:templatetype
+      jcr:mixinTypes: ['mix:referenceable']
+      jcr:uuid: 8fe6c31e-ca00-4d2b-b95d-8edc74460801
+      /hipposysedit:nodetype:
+        jcr:primaryType: hippo:handle
+        jcr:mixinTypes: ['mix:referenceable']
+        jcr:uuid: f3093505-3771-4ccc-9d99-d848c0e384b2
+        /hipposysedit:nodetype:
+          jcr:primaryType: hipposysedit:nodetype
+          jcr:mixinTypes: ['hipposysedit:remodel']
+          hipposysedit:supertype: ['hippo:document', 'hippostdpubwf:document', 'hippostd:publishableSummary']
+          hipposysedit:uri: http://www.hstspringsecdemo.com/hstspringsecdemo/nt/1.0
