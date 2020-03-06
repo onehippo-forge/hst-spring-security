@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright 2018-2019 Hippo B.V. (http://www.onehippo.com)
+  Copyright 2018-2020 Hippo B.V. (http://www.onehippo.com)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,38 +18,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.onehippo.cms7</groupId>
-    <artifactId>hippo-essentials-plugins</artifactId>
-    <version>13.4.0</version>
+    <groupId>org.onehippo.forge.hst-springsec</groupId>
+    <artifactId>hst-springsec-plugin</artifactId>
+    <version>3.0.0</version>
   </parent>
 
   <name>Hippo spring security  plugin</name>
   <description>HST Spring Security Support project provides seamless integration with Spring Security for HST-2 SITE applications.</description>
-  <groupId>org.onehippo.essentials</groupId>
-  <artifactId>essentials-hippo-security-plugin</artifactId>
-  <version>2.1.0</version>
-  <properties>
-    <essentials.version>13.4.0</essentials.version>
-  </properties>
+  <artifactId>hst-springsec-essentials</artifactId>
   <dependencies>
+    <dependency>
+      <groupId>javax.jcr</groupId>
+      <artifactId>jcr</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-essentials-plugin-sdk-api</artifactId>
-      <version>${essentials.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-essentials-plugin-sdk-implementation</artifactId>
-      <version>${essentials.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  <repositories>
-    <repository>
-      <id>hippo</id>
-      <name>Hippo maven 2 repository.</name>
-      <url>http://maven.onehippo.com/maven2/</url>
-    </repository>
-  </repositories>
+  <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+  </build>
 </project>

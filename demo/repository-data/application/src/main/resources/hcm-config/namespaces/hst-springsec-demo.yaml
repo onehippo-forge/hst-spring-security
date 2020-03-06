@@ -3,4 +3,4 @@ definitions:
     /hippo:namespaces/hstspringsecdemo:
       jcr:primaryType: hipposysedit:namespace
       jcr:mixinTypes: ['mix:referenceable']
-      jcr:uuid: 81a0320d-3fee-4154-aab5-1da2a4b106c5
+      jcr:uuid: 91fdf1df-12a3-4309-a243-abe212819efb

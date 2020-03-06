@@ -1,23 +1,23 @@
 /content/documents/hstspringsecdemo/events:
   jcr:primaryType: hippostd:folder
   jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-  jcr:uuid: f27593d4-1d3e-424c-bfec-040e8a77a025
+  jcr:uuid: 01590aea-b7cf-47b7-9ac9-895bcaf36203
   hippostd:foldertype: [new-events-document, new-events-folder]
-  hippotranslation:id: 9b7f1daa-0aa4-4bc8-a281-cc400e14af64
+  hippotranslation:id: 64c0aeec-c74e-4630-af28-feed6a2d0ba5
   hippotranslation:locale: en
-  /2019:
+  /2020:
     jcr:primaryType: hippostd:folder
     jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-    jcr:uuid: 59410e23-53fe-41dc-b19a-a9863baf896e
+    jcr:uuid: 23b5a639-8d70-4142-ae71-b11b4717cdcd
     hippostd:foldertype: [new-events-document, new-events-folder]
-    hippotranslation:id: 7c8073bd-fc12-41a9-836c-68ef1cc25ef1
+    hippotranslation:id: 0f26ec4f-5fa2-4bf5-b24c-ded95d1e7dfe
     hippotranslation:locale: en
     /01:
       jcr:primaryType: hippostd:folder
       jcr:mixinTypes: ['hippotranslation:translated', 'mix:referenceable']
-      jcr:uuid: 94714c5d-6e5a-43a1-b2c2-750b6445a69e
+      jcr:uuid: a41e3a9b-3728-47ec-a538-b4f8fb5fc74f
       hippostd:foldertype: [new-events-document, new-events-folder]
-      hippotranslation:id: da697e93-6978-44e5-a608-4d11dc736208
+      hippotranslation:id: 05c0387d-33a8-4974-8451-0084e4a0919e
       hippotranslation:locale: en
       /breakfast:
         jcr:primaryType: hippo:handle
@@ -27,7 +27,7 @@
         /breakfast:
           jcr:primaryType: hstspringsecdemo:eventsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: 8b30b53b-096e-4866-bc6c-0f4c0457d949
+          jcr:uuid: e1cc83a4-42ed-4664-a077-419f555abd81
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -36,11 +36,11 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T11:11:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
-          hippotranslation:id: 19b473fb-e84a-422f-873d-5c2585cada4f
+          hippotranslation:id: 768a534c-42d7-49b9-91af-18c294540f76
           hippotranslation:locale: en
           hstspringsecdemo:date: 2013-11-12T08:00:00+01:00
           hstspringsecdemo:documenttype: event
-          hstspringsecdemo:enddate: 2020-01-18T18:50:00+09:00
+          hstspringsecdemo:enddate: 2021-01-23T16:34:00+01:00
           hstspringsecdemo:introduction: Start the day with a nice breakfast.
           hstspringsecdemo:location: Room 101
           hstspringsecdemo:title: Breakfast
@@ -68,7 +68,7 @@
         /introduction-speech:
           jcr:primaryType: hstspringsecdemo:eventsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: fbd6c6af-7355-42d5-810c-fcd56c5fd742
+          jcr:uuid: 4f847a2b-7d97-4568-801b-91bbad26228a
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -77,11 +77,11 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T11:16:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
-          hippotranslation:id: 48c06f71-084a-433a-ad90-97f03767b513
+          hippotranslation:id: 0e063209-574b-418d-95b9-9168bcf81ffd
           hippotranslation:locale: en
           hstspringsecdemo:date: 2013-11-12T10:00:00+01:00
           hstspringsecdemo:documenttype: event
-          hstspringsecdemo:enddate: 2020-01-18T18:50:00+09:00
+          hstspringsecdemo:enddate: 2021-01-23T16:34:00+01:00
           hstspringsecdemo:introduction: After breakfast there will be an introductory
             speech.
           hstspringsecdemo:location: Room 400
@@ -109,7 +109,7 @@
         /workshop:
           jcr:primaryType: hstspringsecdemo:eventsdocument
           jcr:mixinTypes: ['mix:referenceable']
-          jcr:uuid: a1b0ddd8-0e6e-44d1-b44f-6225fa03b573
+          jcr:uuid: 6b028cd9-017c-48be-b85f-5c50f507c5c9
           hippo:availability: [live, preview]
           hippostd:holder: admin
           hippostd:state: published
@@ -118,11 +118,11 @@
           hippostdpubwf:lastModificationDate: 2013-11-12T11:18:00+01:00
           hippostdpubwf:lastModifiedBy: admin
           hippostdpubwf:publicationDate: 2013-11-12T12:16:00+01:00
-          hippotranslation:id: 7864aceb-e815-4ce1-a65a-4b390f330b00
+          hippotranslation:id: 07f9aed3-e2ea-4efa-90f5-2b8cf0a9376b
           hippotranslation:locale: en
           hstspringsecdemo:date: 2013-11-12T13:00:00+01:00
           hstspringsecdemo:documenttype: event
-          hstspringsecdemo:enddate: 2020-01-18T18:50:00+09:00
+          hstspringsecdemo:enddate: 2021-01-23T16:34:00+01:00
           hstspringsecdemo:introduction: Workshop starts at 1:00
           hstspringsecdemo:location: Room 600
           hstspringsecdemo:title: Workshop

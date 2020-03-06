@@ -1,3 +1,4 @@
 /hst:hst/hst:configurations/hstspringsecdemo/hst:workspace/hst:sitemenus/main/news:
+  .meta:order-before: events
   jcr:primaryType: hst:sitemenuitem
   hst:referencesitemapitem: news
