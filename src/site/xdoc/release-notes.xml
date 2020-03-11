@@ -34,15 +34,15 @@
           </th>
         </tr>
         <tr>
+          <td>3.x</td>
+          <td>5.2.1.RELEASE</td>
+          <td>14.x</td>
+        </tr>
+        <tr>
           <td>2.x</td>
           <td>5.2.1.RELEASE in 2.1.0,<br/>
               5.1.1.RELEASE in 2.0.0</td>
           <td>13.x</td>
-        </tr>
-        <tr>
-          <td>3.x</td>
-          <td>5.2.1.RELEASE</td>
-          <td>14.x</td>
         </tr>
         <tr>
           <td>1.1.x</td>
