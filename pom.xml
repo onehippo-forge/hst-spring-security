@@ -38,7 +38,7 @@
 
 
     <commons.lang.version>2.6</commons.lang.version>
-    <commons-beanutils.version>1.8.0</commons-beanutils.version>
+    <commons-beanutils.version>1.9.2</commons-beanutils.version>
     <commons-proxy.version>1.0</commons-proxy.version>
 
     <lib.junit.version>4.8.2</lib.junit.version>
