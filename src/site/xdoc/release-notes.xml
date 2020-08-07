@@ -75,6 +75,7 @@
         <ul>
           <li>
             <a href='https://issues.onehippo.com/browse/HIPFORGE-353'>HIPFORGE-353</a><br/>
+            - Bump (provided) Spring dependency version from 5.2.1.RELEASE to 5.2.8.RELEASE<br/>
             - Bump (provided) Spring Security dependency version from 5.2.1.RELEASE to 5.3.4.RELEASE<br/>
             - Bump (provided) commons-beanutils dependency version from 1.8.0 to 1.9.4
           </li>
